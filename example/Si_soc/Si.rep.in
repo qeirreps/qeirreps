@@ -1,0 +1,45 @@
+&CONTROL
+    calculation = 'bands'
+    restart_mode='from_scratch',
+    prefix='Si'
+    pseudo_dir='~/research/dft/ONCVPSP-master/abinit/'
+    outdir='/work/rep/Si'
+    tstress=.true.
+    tprnfor=.true.
+    wf_collect=.true.
+/
+&SYSTEM
+    ibrav = 0
+    nat = 2
+    ntyp = 1
+    ecutwfc=100.
+    occupations='smearing'
+    smearing='m-p'
+    degauss=0.01
+    use_all_frac=.true.
+    lspinorb=.true.
+    noncolin=.true.
+/
+&ELECTRONS
+    mixing_beta=0.3
+    conv_thr=1.0d-8
+/
+ATOMIC_SPECIES
+Si	28.0855	Si_ONCV_PBE_fr.upf
+ATOMIC_POSITIONS angstrom
+Si       0.0000000000     0.0000000000     0.0000000000
+Si       1.3673862150     4.1021586450     4.1021586450
+K_POINTS crystal
+8
+0.0	0.0	0.0	1
+0.5	0.0	0.0	1
+0.0	0.5	0.0	1
+0.0	0.0	0.5	1
+0.0	0.5	0.5	1
+0.5	0.0	0.5	1
+0.5	0.5	0.0	1
+0.5	0.5	0.5	1
+CELL_PARAMETERS angstrom
+    0.0000000000     2.7347724300     2.7347724300
+    2.7347724300     0.0000000000     2.7347724300
+    2.7347724300     2.7347724300     0.0000000000

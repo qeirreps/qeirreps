@@ -1,0 +1,6 @@
+&bands
+outdir = '/work/band/Bi',
+prefix='Bi',
+filband='Bi.band',
+lsym=.true.
+/
