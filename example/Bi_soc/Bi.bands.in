@@ -1,5 +1,5 @@
 &bands
-outdir = '/work/band/Bi',
+outdir = './work/band/',
 prefix='Bi',
 filband='Bi.band',
 lsym=.true.

@@ -1,0 +1,185 @@
+mpijob CMD    : mpirun -f /tmp/mpiexec.params.k050801.20701
+mpijob PARAMS : -d
+        /home/k0508/k050801/research/dft/qeirreps/v1/qeirreps/reference/Si_soc
+        r1i0n1 24 omplace -nt 1
+        "/home/k0508/k050801/research/dft/qe-6.2/bin/pw.x"
+
+SGI MPT Placement option
+--------------------------
+omplace -nt 1
+
+Node   MPI
+------------
+r1i0n1 24
+
+
+     Program PWSCF v.6.2 (svn rev. 13949:13950) starts on  8Apr2020 at 16:20:38 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on    24 processors
+
+     MPI processes distributed on     1 nodes
+     R & G space division:  proc/nbgrp/npool/nimage =      24
+     Waiting for input...
+     Reading input from standard input
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  3
+
+     Atomic positions and unit cell read from directory:
+     ./work/band/Si.save/
+ 
+
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     a serial algorithm will be used
+
+ 
+     Parallelization info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Min          61      61     17                 1553     1553     238
+     Max          62      62     18                 1556     1556     242
+     Sum        1483    1483    421                37309    37309    5769
+ 
+
+
+     bravais-lattice index     =            0
+     lattice parameter (alat)  =       7.3086  a.u.
+     unit-cell volume          =     276.0515 (a.u.)^3
+     number of atoms/cell      =            2
+     number of atomic types    =            1
+     number of electrons       =         8.00
+     number of Kohn-Sham states=           16
+     kinetic-energy cutoff     =     100.0000  Ry
+     charge density cutoff     =     400.0000  Ry
+     Exchange-correlation      = PBE ( 1  4  3  4 0 0)
+     Non magnetic calculation with spin-orbit
+
+
+     celldm(1)=   7.308615  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   0.000000   0.707107   0.707107 )  
+               a(2) = (   0.707107   0.000000   0.707107 )  
+               a(3) = (   0.707107   0.707107   0.000000 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = ( -0.707107  0.707107  0.707107 )  
+               b(2) = (  0.707107 -0.707107  0.707107 )  
+               b(3) = (  0.707107  0.707107 -0.707107 )  
+
+
+     PseudoPot. # 1 for Si read from file:
+     ../../pseudo/soc/Si.upf
+     MD5 check sum: d8e8ea3dd55db7858206a05f373c9c65
+     Pseudo is Norm-conserving + core correction, Zval =  4.0
+     Generated using ONCVPSP code by D. R. Hamann
+     Using radial grid of 1528 points, 10 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   1
+                l(6) =   1
+                l(7) =   2
+                l(8) =   2
+                l(9) =   2
+               l(10) =   2
+
+     atomic species   valence    mass     pseudopotential
+        Si             4.00    28.08550     Si( 1.00)
+
+     48 Sym. Ops., with inversion, found (36 have fractional translation)
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1           Si  tau(   1) = (   0.8838835   0.8838835   0.8838835  )
+         2           Si  tau(   2) = (   0.5303301   0.5303301   0.5303301  )
+
+     number of k points=   362  Methfessel-Paxton smearing, width (Ry)=  0.0100
+
+     Number of k-points >= 100: set verbosity='high' to print them.
+
+     Dense  grid:    37309 G-vectors     FFT dimensions: (  48,  48,  48)
+
+     Estimated max dynamical RAM per process >       7.32 MB
+
+     Estimated total dynamical RAM >     175.76 MB
+
+     The potential is recalculated from file :
+     ./work/band/Si.save/charge-density.dat
+
+     Starting wfc are   16 randomized atomic wfcs
+
+     Band Structure Calculation
+     Davidson diagonalization with overlap
+
+     ethr =  1.25E-10,  avg # of iterations = 19.8
+
+     total cpu time spent up to now is       44.3 secs
+
+     End of band structure calculation
+
+     Number of k-points >= 100: set verbosity='high' to print the bands.
+
+     Writing output data file Si.save
+ 
+     init_run     :      0.05s CPU      0.08s WALL (       1 calls)
+     electrons    :     42.49s CPU     43.93s WALL (       1 calls)
+
+     Called by init_run:
+     wfcinit      :      0.00s CPU      0.01s WALL (       1 calls)
+     potinit      :      0.01s CPU      0.01s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :     42.49s CPU     43.93s WALL (       1 calls)
+     v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.05s CPU      0.04s WALL (     362 calls)
+     cegterg      :     38.28s CPU     39.35s WALL (     476 calls)
+
+     Called by sum_band:
+
+     Called by *egterg:
+     h_psi        :     32.04s CPU     33.22s WALL (    7992 calls)
+     g_psi        :      0.22s CPU      0.24s WALL (    7154 calls)
+     cdiaghg      :      4.84s CPU      4.85s WALL (    7516 calls)
+
+     Called by h_psi:
+     h_psi:pot    :     31.93s CPU     33.10s WALL (    7992 calls)
+     h_psi:calbec :      1.32s CPU      1.29s WALL (    7992 calls)
+     vloc_psi     :     29.02s CPU     30.18s WALL (    7992 calls)
+     add_vuspsi   :      1.55s CPU      1.59s WALL (    7992 calls)
+
+     General routines
+     calbec       :      1.30s CPU      1.27s WALL (    7992 calls)
+     fft          :      0.02s CPU      0.03s WALL (      14 calls)
+     fftw         :     26.75s CPU     27.92s WALL (  337116 calls)
+     davcio       :      0.11s CPU      0.15s WALL (     724 calls)
+ 
+     Parallel routines
+     fft_scatt_xy :      1.77s CPU      1.91s WALL (  337130 calls)
+     fft_scatt_yz :     13.62s CPU     14.26s WALL (  337130 calls)
+ 
+     PWSCF        :    48.26s CPU        55.67s WALL
+
+ 
+   This run was terminated on:  16:21:33   8Apr2020            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=

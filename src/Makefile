@@ -1,0 +1,17 @@
+# Copyright (c) Akishi Matsugatani, Seishiro Ono, Yusuke Nomura, Haruki Watanabe, 2020
+FC     = mpif90
+LFLAGS = -mkl
+
+.SUFFIXES: .f90
+
+.f90.o:
+	$(FC) $(LFLAGS) -c $<
+
+TARGET = qeirreps.x
+OBJS = qeirreps.o
+
+${TARGET} : $(OBJS)
+	$(FC) $(LFLAGS) -o $@ $(OBJS) ${LFLAGS}
+
+clean:
+	${RM} ${TARGET} ${OBJS}
