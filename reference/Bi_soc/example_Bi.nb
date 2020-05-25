@@ -1,0 +1,88 @@
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[         0,          0]
+NotebookDataLength[      2913,         87]
+NotebookOptionsPosition[      2324,         64]
+NotebookOutlinePosition[      2676,         79]
+CellTagsIndexPosition[      2633,         76]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Input of DFT", "Section",
+ CellChangeTimes->{{3.782446721711748*^9, 3.782446725244866*^9}, {
+  3.789711037769709*^9, 
+  3.789711038250773*^9}},ExpressionUUID->"17d1045a-3df6-4686-a3e5-\
+bd2de197f4e9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"pgList", "=", 
+   RowBox[{"ToExpression", "[", 
+    RowBox[{"Import", "[", "\"\<output/pg_import.txt\>\"", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tgList", "=", 
+   RowBox[{"ToExpression", "[", 
+    RowBox[{"Import", "[", "\"\<output/tg_import.txt\>\"", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"srgList", "=", 
+   RowBox[{"ToExpression", "[", 
+    RowBox[{"Import", "[", "\"\<output/srg_import.txt\>\"", "]"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"BandList", "=", 
+   RowBox[{"ToExpression", "[", 
+    RowBox[{"Import", "[", "\"\<output/character_import.txt\>\"", "]"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"factorSystemSpin", "=", 
+   RowBox[{"ToExpression", "[", 
+    RowBox[{
+    "Import", "[", "\"\<output/factor_system_spin_import.txt\>\"", "]"}], 
+    "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7821750971594467`*^9, 3.782175098494316*^9}, {
+  3.782444740793151*^9, 3.7824448269769*^9}, {3.7824476385510397`*^9, 
+  3.782447660801591*^9}, {3.78244800762916*^9, 3.782448007795328*^9}, {
+  3.7824513783896093`*^9, 3.782451382945798*^9}, {3.782451456865991*^9, 
+  3.78245145809448*^9}, {3.7929608732037888`*^9, 3.7929608971444893`*^9}, {
+  3.794010282303811*^9, 3.7940103577831717`*^9}, {3.79401071459402*^9, 
+  3.794010728781945*^9}, {3.794010758803008*^9, 3.794010815170589*^9}, {
+  3.79898343863412*^9, 
+  3.798983444955489*^9}},ExpressionUUID->"245e87cb-b301-4b7c-a453-\
+32882e745dc5"]
+}, Open  ]]
+},
+WindowSize->{1536, 786},
+WindowMargins->{{Automatic, 25}, {Automatic, -1106}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (2019\:5e745\:67083\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[422, 15, 206, 4, 67, "Section",ExpressionUUID->"17d1045a-3df6-4686-a3e5-bd2de197f4e9"],
+Cell[631, 21, 1677, 40, 224, "Input",ExpressionUUID->"245e87cb-b301-4b7c-a453-32882e745dc5"]
+}, Open  ]]
+}
+]
+*)
+

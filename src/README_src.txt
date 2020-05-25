@@ -4,23 +4,27 @@
 
 Here, qeirreps/src is the source directory.
 
+======================================
+
+# Contents
+
 qeirreps.f90:
 The Fortran 90 source code of qeirreps.
 
 Makefile:
-The setting file for compile qeirreps.
+The setting file for compiling qeirreps.
 
 ======================================
 
-How to compile qeirreps
+# Installation of qeirreps
 
 0. Requirement
-   - Fortran compiler
+   - Fortran 90 compiler
    - BLAS library
-   - LAPACK library (intel MKL)
+   - LAPACK library
 
-1. Edit "Makefile" for your computational situation.
-   Put the link for Fortran compiler and MKL library.
+1. Edit "Makefile" for your compiling environment.
+   Specify the compiler and libraries.
 
 2. Compile qeirreps. Type "make".
    The executable binary "qeirreps.x" will be produced.

@@ -4,10 +4,34 @@
 
 Here, qeirreps is the root directory.
 
-1. See "Preparation" section in this document to install Quantum Espresso and qe2respack.
+1. See the section "Preparation" in this document to install Quantum Espresso and qe2respack.
 2. Go to "src" to compile qeirreps. See src/README_src.txt for detailed information.
-3. See "example", "example/README_ex.txt", and each example directory to know how to use qeirreps.
-4. See "reference" and "reference/README_ref.txt" to confirm the results.
+3. See the section "Usage" in this document to know how to use qeirreps.
+4. See "example", "example/README_ex.txt", and each example directory. They work as the tutorials.
+5. See "reference" and "reference/README_ref.txt" to confirm the results.
+
+======================================
+
+# Contents
+
+src:
+The source directory. The Fortran 90 program "qeirreps.f90" is here.
+See src/README_src.txt for compilation.
+
+example:
+The directory to store the example files.
+There are some input files for calculation by QE, qe2respack, and qeirreps.
+See example/README_ex.txt for detailed information.
+
+reference:
+The directory to store the reference files. 
+One can check the result of calculation in example directories.
+See reference/README_ref.txt for detailed information.
+
+pseudo:
+The directory to store the files of pseudo potential.
+See pseudo/README_psd.txt for detailed information.
+
 
 ======================================
 
@@ -18,6 +42,9 @@ Here, we introduce how to get and install these applications.
 
 1. Install Quantum Espresso (QE) for DFT calculation of the target material.
    See "https://www.quantum-espresso.org/".
+
+   The version of QE should be qe-6.3 or before. 
+   The later versions do not support the following option.
    
    When you compile QE, use the following option.
    
@@ -27,35 +54,81 @@ Here, we introduce how to get and install these applications.
    It enables qe2respack to use iotk toolkits.
 
 2. Install qe2respack to prepare input files of qeirreps from the output of QE.
-   See "https://github.com/mnmpdadish/respackDev/tree/master/util/qe2respack" to get qe2respack.
-   qe2respack is available in "respackDev-master/util/qe2respack/".
+   See the branch of respack "maxime2" in GitHub repository "https://github.com/mnmpdadish/respackDev/tree/maxime2" to get qe2respack.
+   qe2respack is in "util/qe2respack/".
+   
+   REMARK: This program qe2respack belongs to the program package RESPACK (https://sites.google.com/view/kazuma7k6r).
+           For the latest version of RESPACK, qe2respack does not support DFT calculation with spin-orbit coupling.
+           For the usage of qeirreps, please use the specific version obtained as above.
 
-   See "README.txt" in that directory, edit "Makefile" to specify the location of QE,
-   and type "make" to compile qe2respack.
+   See "README.txt" in that directory.
+   Edit "Makefile" to specify the compiler, libraries, and the location of QE.
+   Type "make" to compile qe2respack.
 
-   Our program qeirreps currently uses qe2respack to read the output files of QE.
 
+The limitation for version of QE and the dependence on qe2respack will be improved in future update.
 
 ======================================
 
 
-# Contents
+# Usage
 
-src:
-The source directory. The Fortran 90 program "qeirreps.f90" is available here.
-See src/README_src.txt for compilation.
+Here, we introduce how to use qeirreps.
+The example directory is also helpful as tutorial. See "example/README_ex.txt" and each example directory for more information.
 
-example:
-The directory to store the example files.
-See example/README_ex.txt for detailed information.
 
-reference:
-The directory to store the reference files.
-See reference/README_ref.txt for detailed information.
+1. Preparing input files of qeirreps
 
-pseudo:
-The directory to store the files of pseudo potential.
-See pseudo/README_psd.txt for detailed information.
+   qeirreps works based on the output of QE. To prepare the input files of qeirreps, the following three steps are needed to be done one by one:
 
+1-1. Self-consistent first-principles (scf) calculation of a target material.
+1-2. Non-self-consistent first-principles (nscf) calculation of the material for each high-symmetry momentum.
+1-3. Data conversion from QE output files to qeirreps input files.
+
+1-1 and 1-2: carried out by the original functions of QE.
+   The wavefunction data will be produced in the directory OUTDIR/PREFIX.save which specified in input files of QE.
+   
+   REMARK:
+   Norm-conserving calculations are necessary.
+   Set the option "wf_collect = .TRUE."
+   Use the pseudo potentials optimized for norm-conserving calculations. See README_psd in the directory "pseudo" for detailed information.
+
+1-3: carried out by qe2respack.
+   The output files in OUTDIR/PREFIX.save should be converted by qe2respack into the form of input files of qeirreps.
+   Create a directory named "dir-wfn" in a directory. This directory is referred to as DIRECTORY_NAME here.
+
+   Type as follows at the directory "DIRECTORY_NAME".
+
+   $ PATH_OF_qe2respack/qe2respack OUTDIR/PREFIX.save
+
+   "PATH_OF_qe2respack" is the directory which has executable file of qe2respack.
+   "OUTDIR/PREFIX.save" is the directory produced by QE in step 1-2 and 1-3.
+
+   Some files (i.e. "dat.wfn"), will be generated in the directory "dir-wfn" qeirreps reads these files in the latter step.
+
+
+2. Running qeirreps 
+
+   Create a directory named "output" in the directory "DIRECTORY_NAME" referred in 1-3.
+   Run qeirreps by typing as 
+
+   $ PATH_OF_qeirreps/qeirreps.x DIRECTORY_NAME
+
+   "PATH_OF_qeirreps" is the location of the qeirreps executable file.
+   "DIRECTORY_NAME" is the directory referred in 1-3, which contains "dir-wfn" and "output".
+
+   Some text files will be exported in "output", for example, "character_import.txt".
+   Check the document in reference directory "qeirreps/reference/README_ref.txt" for more information.
+
+   For materials with inversion symmetry, qeirreps can also evaluate the Z4 index.
+   An option of filling should be added to the command as 
+
+   $ PATH_OF_qeirreps/qeirreps.x DIRECTORY_NAME FILLING
+
+   "FILLING" is the number of electrons per unit cell of the target material.
+   This filling is shown in the standard output of scf calculation by QE as "number of electrons = FILLING"
+
+   Z4 index will be exported as "z4.dat" in the directory "output".
+ 
 
 ======================================

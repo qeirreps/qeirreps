@@ -2,10 +2,15 @@
 
 ======================================
 
-Here, qeirreps/reference is the directory which stores some output files of 
-QE, qe2respack, and qeirreps as examples.
+
+Here, qeirreps/reference is the directory which stores some output files of QE, qe2respack, and qeirreps as examples.
 
 See also qeirreps/example to confirm and test the input files.
+
+
+======================================
+
+# Contents
 
 Bi_nonsoc:
 Calculation for bismuth without spin-orbit coupling
@@ -19,29 +24,46 @@ Calculation for silicon without spin-orbit coupling
 Si_soc:
 Calculation for silicon with spin-orbit coupling
 
+PbPt3_nonsoc:
+Calculation for PbPt3 without spin-orbit coupling
+
+PbPt3_soc:
+Calculation for PbPt3 with spin-orbit coupling
+
+
 ======================================
 
-# Each compound
+# About materials
 
-The four types of examples are available here.
+The samples for three types of materials are available here.
 
-Brief introduction for each compound is follows.
-See "https://materialsproject.org/" and the DFT input files
-to confirm the structure data.
+Brief explanation for each material is follows.
+See "https://materialsproject.org/" and the DFT input files to confirm the structure data.
 
 Bi:
-symmetry group: R-3m (#166) symmorphic
-Without spin-orbit coupling, the high symmetry line semi metal.
-With spin-orbit coupling, the higher-order topological insulator.
-The symmetry-based indicator is calculated from irreps. of inversion symmetry.
+symmetry group: R-3m (#166), symmorphic
+One of the candidate for a higher-order topological insulator.
+With the spin-orbit coupling, the symmetry-based indicator is calculated from the inversion parities of Bloch wavefunction.
+Z4 index can be evaluated by using the function of qeirreps: z4 = 2.
 
 Si:
-symmetry group: Fd-3m (#227) non-symmorphic
-Trivial semiconductor.
-The symmetry-based indicator is calculated from irreps. of inversion symmetry.
+symmetry group: Fd-3m (#227), non-symmorphic
+A trivial semiconductor.
+With the spin-orbit coupling, the symmetry-based indicator is calculated from the inversion parities of Bloch wavefunction.
+Z4 index can be evaluated by using the function of qeirreps: z4 = 0.
+
+PbPt3:
+symmetry group: Pm-3m (#221), symmorphic
+One of the candidate for a topological semimetal.
+The symmetry-based indicator is related to inversion, rotoinversion, and the mirror symmetry.
+Z4 and Z8 indices can be evaluated from the result of qeirreps:(z4, z8) = (3,6).
+REMARK: This Z4 index is different from those of bismuth and silicon.
+
 
 ======================================
 
-See each directory for detailed information about output files.
+
+See each reference directory for detailed information about output files.
+
 
 ======================================

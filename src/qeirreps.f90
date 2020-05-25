@@ -109,13 +109,20 @@ program Main
   allocate(CO(ncomp,maxNGI,NBAND,Nk_irr))
   CO=0.0d0
 
+!  do ik=1,Nk_irr
+!     do ib=1,NBAND 
+!        do ic=1,ncomp
+!           read(102)(CO(ic,i,ib,ik),i=1,NGI(ik))
+!        end do
+!     end do
+!  end do
+
   do ik=1,Nk_irr
-     do ib=1,NBAND 
-        do ic=1,ncomp
-           read(102)(CO(ic,i,ib,ik),i=1,NGI(ik))
-        end do
+     do ib =1,NBAND
+        read(102) ((CO(ic,i,ib,ik),i=1,NGI(ik)),ic=1,ncomp)
      end do
   end do
+
   CLOSE(102)
 
 
@@ -187,13 +194,14 @@ program Main
   call factor_system_out(Nk_irr,nsymq,gk,SKI,facsys,facsys_spin,data_dir)
   
 
-  call kgroup_out(Nk_irr,nsymq,SKI,gk,data_dir)
+!  call kgroup_out(Nk_irr,nsymq,SKI,gk,data_dir)
 
   allocate(chrct(Nk_irr,ncomp*nsymq,maxval(energy_level)))
   call get_character(Nk_irr,nsymq,ncomp,NBAND,energy_level,degeneracy,repmat,chrct)
   call character_out(Nk_irr,nsymq,ncomp,NBAND,energy_level,degeneracy,SKI,gk,chrct,data_dir)
 
-  if(flag_fill) call get_kappa1(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
+!  if(flag_fill) call get_kappa1(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
+  if(flag_fill) call get_z4(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
 
   print*,"================="
   print*,""
@@ -473,10 +481,10 @@ contains
 
     a(:,:)=lat(:,:)
 
-    print*,"================="
-    print*,"space group symmetry:"
-    print*,""
-    print*,"rotation part:"
+!    print*,"================="
+!    print*,"space group symmetry:"
+!    print*,""
+!    print*,"rotation part:"
     
     call dgetrf(n,n,a,lda,ipiv,info)
     
@@ -515,16 +523,27 @@ contains
     end do
     
 
+!    do iop=1,nsymq
+!       print*, iop
+!       print'(3f6.2)',tr(1,:,iop)
+!       print'(3f6.2)',tr(2,:,iop)
+!       print'(3f6.2)',tr(3,:,iop)
+!       print*,""
+!    end do
+
+    OPEN(11,FILE=trim(data_dir)//"/output/pg.dat",status="replace")
+
     do iop=1,nsymq
-       print*, iop
-       print'(3f6.2)',tr(1,:,iop)
-       print'(3f6.2)',tr(2,:,iop)
-       print'(3f6.2)',tr(3,:,iop)
-       print*,""
+       write(11,*)  iop
+       write(11,*) tr(1,:,iop)
+       write(11,*) tr(2,:,iop)
+       write(11,*) tr(3,:,iop)
+       write(11,*) ""
     end do
+    
+    CLOSE(11)
 
-
-    OPEN(12,FILE=trim(data_dir)//"/output/rg_import.txt",status="replace")
+    OPEN(12,FILE=trim(data_dir)//"/output/pg_import.txt",status="replace")
 
     write(12,fmt='(a)',advance='no')"{"
     do iop=1,nsymq
@@ -549,16 +568,25 @@ contains
     
     integer :: i, j, iop
 
-    print*,"translation part:"
+!    print*,"translation part:"
     
 
+!    do iop=1,nsymq
+!       print*,iop
+!       print'(1I3,"/",1I3," ",1I3,"/",1I3," ",1I3,"/",1I3)',pg(1,iop),nnp,pg(2,iop),nnp,pg(3,iop),nnp
+!       print*,""
+!    end do
+
+    OPEN(11,FILE=trim(data_dir)//"/output/tg.dat",status="replace")
+
     do iop=1,nsymq
-       print*,iop
-       print'(1I3,"/",1I3," ",1I3,"/",1I3," ",1I3,"/",1I3)',pg(1,iop),nnp,pg(2,iop),nnp,pg(3,iop),nnp
-       print*,""
+       write(11,*),iop
+       write(11,'(1I3,"/",1I3," ",1I3,"/",1I3," ",1I3,"/",1I3)'),pg(1,iop),nnp,pg(2,iop),nnp,pg(3,iop),nnp
+       write(11,*),""
     end do
 
-
+    CLOSE(11)
+    
     OPEN(12,FILE=trim(data_dir)//"/output/tg_import.txt",status="replace")
 
     write(12,fmt='(a)',advance='no')"{"
@@ -607,7 +635,7 @@ contains
     id(1,1)=1d0; id(2,2)=1d0; id(3,3)=1d0
     inv(1,1)=-1d0; inv(2,2)=-1d0; inv(3,3)=-1d0
 
-    print*,'spin rotation part:'
+!    print*,'spin rotation part:'
     
     do iop=1,nsymq
        tmp1=0d0; tmp2=0d0
@@ -690,13 +718,24 @@ contains
     deallocate(a); deallocate(rwork); deallocate(w)
 
 
-    do iop=1,nsymq
-       print*, iop
-       print'(4f10.6)', sr(1,:,iop)
-       print'(4f10.6)', sr(2,:,iop)
-       print*,""
-    end do
+!    do iop=1,nsymq
+!       print*, iop
+!       print'(4f10.6)', sr(1,:,iop)
+!       print'(4f10.6)', sr(2,:,iop)
+!       print*,""
+!    end do
 
+    OPEN(11,FILE=trim(data_dir)//"/output/srg.dat",status="replace")
+
+    do iop=1,nsymq
+       write(11,*), iop
+       write(11,'(4f10.6)'), sr(1,:,iop)
+       write(11,'(4f10.6)'), sr(2,:,iop)
+       write(11,*),""
+    end do
+    
+    CLOSE(11)
+    
     OPEN(12,FILE=trim(data_dir)//"/output/srg_import.txt",status="replace")
 
     write(12,fmt='(a)',advance='no')"{"
@@ -1063,55 +1102,55 @@ contains
     
     integer :: ik,iop,jop
     
-    OPEN(20,FILE=trim(data_dir)//"/output/factor_system_nonsymmorphic_import.txt",status="replace")
+!    OPEN(20,FILE=trim(data_dir)//"/output/factor_system_nonsymmorphic_import.txt",status="replace")
     
-    write(20,fmt='(a)',advance='no')"{"
+!    write(20,fmt='(a)',advance='no')"{"
 
-    do ik=1,Nk_irr
-       write(20,fmt='("{{",1f8.5,",",1f8.5,",",1f8.5,"},")',advance='no')SKI(:,ik)
-       write(20,fmt='(a)',advance='no')"{"
-       do iop=1,nsymq
-          write(20,fmt='(a)',advance='no')"{"
-          do jop=1,nsymq
-             if(gk(ik,iop).and.gk(ik,jop))then
-                write(20,fmt='(1f8.5,"+(",1f8.5,")I")',advance='no')facsys(ik,iop,jop)
-             else
-                write(20,fmt='("Null")',advance='no')
-             end if
-             if(jop/=nsymq)then
-                write(20,fmt='(a)',advance='no')","
-             end if
-          end do
-          write(20,fmt='(a)',advance='no')"}"
-          if(iop/=nsymq)then
-             write(20,fmt='(a)',advance='no')","
-          end if
-       end do
-       
-       write(20,fmt='(a)',advance='no')"}}"
-       if(ik/=Nk_irr)then
-          write(20,fmt='(a)',advance='no')","
-       end if
-    end do
-    write(20,fmt='(a)',advance='no')"}"
+!    do ik=1,Nk_irr
+!       write(20,fmt='("{{",1f8.5,",",1f8.5,",",1f8.5,"},")',advance='no')SKI(:,ik)
+!       write(20,fmt='(a)',advance='no')"{"
+!       do iop=1,nsymq
+!          write(20,fmt='(a)',advance='no')"{"
+!          do jop=1,nsymq
+!             if(gk(ik,iop).and.gk(ik,jop))then
+!                write(20,fmt='(1f8.5,"+(",1f8.5,")I")',advance='no')facsys(ik,iop,jop)
+!             else
+!                write(20,fmt='("Null")',advance='no')
+!             end if
+!             if(jop/=nsymq)then
+!                write(20,fmt='(a)',advance='no')","
+!             end if
+!          end do
+!          write(20,fmt='(a)',advance='no')"}"
+!          if(iop/=nsymq)then
+!             write(20,fmt='(a)',advance='no')","
+!          end if
+!       end do
+!       
+!       write(20,fmt='(a)',advance='no')"}}"
+!       if(ik/=Nk_irr)then
+!          write(20,fmt='(a)',advance='no')","
+!       end if
+!    end do
+!    write(20,fmt='(a)',advance='no')"}"
     
-    close(20)
+!    close(20)
 
-    OPEN(21,FILE=trim(data_dir)//"/output/factor_system_nonsymmorphic.dat",status="replace")
-
-    do ik=1,Nk_irr
-       write(21,fmt='("k=(",1f8.5,",",1f8.5,",",1f8.5,"),")')SKI(:,ik)
-       write(21,*)""
-       do iop=1,nsymq
-          do jop=1,nsymq
-             write(21,fmt='(" ",1f8.5,"+(",1f8.5,")i ")',advance='no')facsys(ik,iop,jop)
-          end do
-          write(21,*)
-       end do
-       write(21,*)
-    end do
-
-    close(21)
+!    OPEN(21,FILE=trim(data_dir)//"/output/factor_system_nonsymmorphic.dat",status="replace")
+!
+!    do ik=1,Nk_irr
+!       write(21,fmt='("k=(",1f8.5,",",1f8.5,",",1f8.5,"),")')SKI(:,ik)
+!       write(21,*)""
+!       do iop=1,nsymq
+!          do jop=1,nsymq
+!             write(21,fmt='(" ",1f8.5,"+(",1f8.5,")i ")',advance='no')facsys(ik,iop,jop)
+!          end do
+!          write(21,*)
+!       end do
+!       write(21,*)
+!    end do
+!
+!    close(21)
     
     OPEN(23,FILE=trim(data_dir)//"/output/factor_system_spin_import.txt",status="replace")
     
@@ -1226,8 +1265,105 @@ contains
     print*,"summation of parities for",count,"k-points"
     print*,kappa1
 
+    OPEN(20,FILE=trim(data_dir)//"/output/sum_parities.dat",status="replace")
+
+    write(20,*),"summation of parities for",count,"k-points"
+    write(20,*),kappa1    
+    
+    CLOSE(20)
+
   end subroutine get_kappa1
 
+
+  subroutine get_z4(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
+    implicit none
+    integer,intent(in) :: Nk_irr, nsymq, ncomp, NBAND, iinv, filling, energy_level(Nk_irr), degeneracy(NBAND,Nk_irr)
+    logical,intent(in) :: gk(Nk_irr,nsymq)
+    complex(8),intent(in) :: chrct(Nk_irr,ncomp*nsymq,maxval(energy_level))
+
+    integer :: ik, il, count, occ, deno=4
+    real(8) :: total, err = 1d-6
+    integer :: z4
+
+    total = 0d0
+    count = 0
+    occ = 0
+
+    do ik=1,Nk_irr
+       if(gk(ik,iinv))then
+          count=count+1
+       end if
+    end do
+    
+    if(count.lt.8)then
+
+       print*,"================="
+       print*,""
+       print*,"Error:"
+       print*,"Only",count,"/ 8 TRIMs are found. Please specify all 8 TRIMs."
+
+       stop
+       
+    else if(count.gt.8)then
+
+       print*,"================="
+       print*,""
+       print*,"Error:"
+       print*,count,"/ 8 TRIMs are found. Please specify 8 different TRIMs."
+
+       stop
+       
+    end if
+
+       
+    
+    do ik=1,Nk_irr
+       if(gk(ik,iinv))then
+          do il=1,energy_level(ik)
+             if(filling<=sum(degeneracy(1:il,ik)))then
+                occ=il
+                exit
+             end if
+          end do
+          
+          total = total + sum(chrct(ik,iinv,1:occ))
+       end if
+    end do
+
+    if(abs(total/deno-nint(total/deno))>err)then
+
+       print*,"================="
+       print*,""
+       print*,"Error:"
+       print*,"sum of parities is not a integer number"
+       print*,"sum of parities:",total
+             
+       stop 
+       
+    end if
+
+    z4=mod(nint(total/deno),4)
+
+    if(z4<0) z4=z4+4
+    
+    print*,"================="
+    print*,""
+    print*,"z4 index:",z4
+    
+    
+    OPEN(20,FILE=trim(data_dir)//"/output/z4.dat",status="replace")
+
+    write(20,*),"sum of parities for",count,"k-points:"
+    write(20,*),total
+
+    write(20,*),"z4 index:"
+    write(20,*),z4
+    
+    CLOSE(20)
+
+  end subroutine get_z4
+
+  
   
 
   subroutine character_out(Nk_irr,nsymq,ncomp,NBAND,energy_level,degeneracy,SKI,gk,chrct,data_dir)

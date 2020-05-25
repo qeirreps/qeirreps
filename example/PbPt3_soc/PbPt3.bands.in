@@ -1,0 +1,6 @@
+&bands
+outdir = './work/band/',
+prefix='PbPt3',
+filband='PbPt3.band',
+lsym=.true.
+/

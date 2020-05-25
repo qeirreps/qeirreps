@@ -1,0 +1,211 @@
+mpijob CMD    : mpirun -f /tmp/mpiexec.params.k050801.12960
+mpijob PARAMS : -d /home/k0508/k050801/research/dft/qeirreps/PbPt3_test r1i0n18 24
+        omplace -nt 1 "/home/k0508/k050801/research/dft/qe-6.2/bin/pw.x"
+
+SGI MPT Placement option
+--------------------------
+omplace -nt 1
+
+Node   MPI
+------------
+r1i0n18 24
+
+
+     Program PWSCF v.6.2 (svn rev. 13949:13950) starts on 15Apr2020 at 20:18:34 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on    24 processors
+
+     MPI processes distributed on     1 nodes
+     R & G space division:  proc/nbgrp/npool/nimage =      24
+     Waiting for input...
+     Reading input from standard input
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  3
+
+     Atomic positions and unit cell read from directory:
+     /work/k0508/k050801/band/PbPt3/PbPt3.save/
+ 
+     Message from routine readpp:
+     file /work/k0508/k050801/band/PbPt3/PbPt3.save/Pt.upf not found
+     Message from routine readpp:
+     file /work/k0508/k050801/band/PbPt3/PbPt3.save/Pb.upf not found
+
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     a serial algorithm will be used
+
+ 
+     Parallelization info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Min          80      80     23                 2674     2674     407
+     Max          81      81     24                 2679     2679     410
+     Sum        1941    1941    553                64229    64229    9795
+ 
+
+
+     bravais-lattice index     =            0
+     lattice parameter (alat)  =       7.8085  a.u.
+     unit-cell volume          =     476.1138 (a.u.)^3
+     number of atoms/cell      =            4
+     number of atomic types    =            2
+     number of electrons       =        68.00
+     number of Kohn-Sham states=           82
+     kinetic-energy cutoff     =     100.0000  Ry
+     charge density cutoff     =     400.0000  Ry
+     Exchange-correlation      = PBE ( 1  4  3  4 0 0)
+     Non magnetic calculation with spin-orbit
+
+
+     celldm(1)=   7.808548  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   1.000000   0.000000   0.000000 )  
+               a(2) = (   0.000000   1.000000   0.000000 )  
+               a(3) = (   0.000000   0.000000   1.000000 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.000000  0.000000  0.000000 )  
+               b(2) = (  0.000000  1.000000  0.000000 )  
+               b(3) = (  0.000000  0.000000  1.000000 )  
+
+
+     PseudoPot. # 1 for Pt read from file:
+     ~/research/dft/pseudo/soc/nc-fr-04_pbe_standard/Pt.upf
+     MD5 check sum: Not computed, couldn't open file
+     Pseudo is Norm-conserving + core correction, Zval = 18.0
+     Generated using ONCVPSP code by D. R. Hamann
+     Using radial grid of 1374 points, 14 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   1
+                l(6) =   1
+                l(7) =   2
+                l(8) =   2
+                l(9) =   2
+               l(10) =   2
+               l(11) =   3
+               l(12) =   3
+               l(13) =   3
+               l(14) =   3
+
+     PseudoPot. # 2 for Pb read from file:
+     ~/research/dft/pseudo/soc/nc-fr-04_pbe_standard/Pb.upf
+     MD5 check sum: Not computed, couldn't open file
+     Pseudo is Norm-conserving + core correction, Zval = 14.0
+     Generated using ONCVPSP code by D. R. Hamann
+     Using radial grid of 1782 points, 10 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   1
+                l(6) =   1
+                l(7) =   2
+                l(8) =   2
+                l(9) =   2
+               l(10) =   2
+
+     atomic species   valence    mass     pseudopotential
+        Pt            18.00   195.08400     Pt( 1.00)
+        Pb            14.00   207.20000     Pb( 1.00)
+
+     48 Sym. Ops., with inversion, found
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1           Pt  tau(   1) = (   0.0000000   0.5000000   0.5000000  )
+         2           Pt  tau(   2) = (   0.5000000   0.0000000   0.5000000  )
+         3           Pt  tau(   3) = (   0.5000000   0.5000000   0.0000000  )
+         4           Pb  tau(   4) = (   0.0000000   0.0000000   0.0000000  )
+
+     number of k points=   362  Methfessel-Paxton smearing, width (Ry)=  0.0100
+
+     Number of k-points >= 100: set verbosity='high' to print them.
+
+     Dense  grid:    64229 G-vectors     FFT dimensions: (  50,  50,  50)
+
+     Estimated max dynamical RAM per process >      44.07 MB
+
+     Estimated total dynamical RAM >       1.03 GB
+
+     The potential is recalculated from file :
+     /work/k0508/k050801/band/PbPt3/PbPt3.save/charge-density.dat
+
+     Starting wfc are   78 randomized atomic wfcs +    4 random wfc
+
+     Band Structure Calculation
+     Davidson diagonalization with overlap
+
+     ethr =  1.47E-11,  avg # of iterations = 16.0
+
+     total cpu time spent up to now is      417.1 secs
+
+     End of band structure calculation
+
+     Number of k-points >= 100: set verbosity='high' to print the bands.
+
+     Writing output data file PbPt3.save
+ 
+     init_run     :      0.08s CPU      0.39s WALL (       1 calls)
+     electrons    :    406.69s CPU    414.20s WALL (       1 calls)
+
+     Called by init_run:
+     wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
+     potinit      :      0.02s CPU      0.08s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :    406.69s CPU    414.17s WALL (       1 calls)
+     v_of_rho     :      0.01s CPU      0.01s WALL (       1 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.21s CPU      0.30s WALL (     362 calls)
+     cegterg      :    362.93s CPU    367.99s WALL (     389 calls)
+
+     Called by sum_band:
+
+     Called by *egterg:
+     h_psi        :    207.29s CPU    212.03s WALL (    6529 calls)
+     g_psi        :      1.37s CPU      1.37s WALL (    5778 calls)
+     cdiaghg      :    114.38s CPU    114.97s WALL (    6140 calls)
+
+     Called by h_psi:
+     h_psi:pot    :    205.50s CPU    210.19s WALL (    6529 calls)
+     h_psi:calbec :     14.62s CPU     14.96s WALL (    6529 calls)
+     vloc_psi     :    160.64s CPU    164.95s WALL (    6529 calls)
+     add_vuspsi   :     30.17s CPU     30.24s WALL (    6529 calls)
+
+     General routines
+     calbec       :     14.60s CPU     14.94s WALL (    6529 calls)
+     fft          :      0.00s CPU      0.07s WALL (      14 calls)
+     fftw         :    147.85s CPU    152.03s WALL ( 1194904 calls)
+     davcio       :      0.34s CPU      1.57s WALL (     724 calls)
+ 
+     Parallel routines
+     fft_scatt_xy :     11.64s CPU     11.65s WALL ( 1194918 calls)
+     fft_scatt_yz :     59.79s CPU     61.84s WALL ( 1194918 calls)
+ 
+     PWSCF        :  7m23.32s CPU     7m51.92s WALL
+
+ 
+   This run was terminated on:  20:26:26  15Apr2020            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=
