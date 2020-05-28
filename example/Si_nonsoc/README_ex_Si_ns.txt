@@ -41,7 +41,7 @@ Use original functions of QE as follows.
 1. scf calculation by QE
 
    Set "outdir" in "Si.scf.in".
-   (ex., outdir='./work/scf')
+   (e.g., outdir='./work/scf')
    
    Run "pw.x" in QE with the input file "Si.scf.in".
 
@@ -50,7 +50,7 @@ the directory "pseudo" for detailed information.
 2. nscf calculation by QE
    
    Set "outdir" in "Si.band.in".
-   (ex., outdir='./work/band')
+   (e.g., outdir='./work/band')
 
    Copy the output files of scf calculation to the reading directory of "Si.band.in".
    (i.e., cp -r ./work/scf/* ./work/band/)
@@ -78,7 +78,7 @@ Use QE, qe2respack, and qeirreps as follows.
 1. scf calculation by QE
 
    Set "outdir" in "Si.scf.in".
-   (ex., outdir='./work/scf')
+   (e.g., outdir='./work/scf')
 
    Run "pw.x" in QE with the input file "Si.scf.in".
 
@@ -90,7 +90,7 @@ Use QE, qe2respack, and qeirreps as follows.
 2. nscf calculation by QE
    
    Set "outdir" in "Si.rep.in".
-   (ex., outdir='./work/rep')
+   (e.g., outdir='./work/rep')
 
    Copy the output files of scf calculation to the reading directory of "Si.band.in"
    (i.e., cp -r ./work/scf/* ./work/rep/)
@@ -108,7 +108,7 @@ Use QE, qe2respack, and qeirreps as follows.
    "PATH_OF_qe2respack" is the directory which has executable file of qe2respack.
    "OUTDIR/PREFIX.save" is the directory produced by QE in step 2.
    
-   Some files (i.e. "dat.wfn"), will be generated in the directory "dir-wfn" qeirreps reads these files in the latter step.
+   Eight files including "dat.wfn" will be generated in the directory "dir-wfn". qeirreps reads these files in step 4.
 
 
 4. Calculation of the character tables by qeirreps

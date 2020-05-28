@@ -95,8 +95,7 @@ The example directory is also helpful as tutorial. See "example/README_ex.txt" a
 
 1-3: carried out by qe2respack.
    The output files in OUTDIR/PREFIX.save should be converted by qe2respack into the form of input files of qeirreps.
-   Create a directory named "dir-wfn" in a directory. This directory is referred to as DIRECTORY_NAME here.
-
+   Go to the work directory (referred to as "DIRECTRY_NAME" in the following).   Create a directory named "dir-wfn" if it does not exist. 
    Type as follows at the directory "DIRECTORY_NAME".
 
    $ PATH_OF_qe2respack/qe2respack OUTDIR/PREFIX.save
@@ -104,12 +103,12 @@ The example directory is also helpful as tutorial. See "example/README_ex.txt" a
    "PATH_OF_qe2respack" is the directory which has executable file of qe2respack.
    "OUTDIR/PREFIX.save" is the directory produced by QE in step 1-2 and 1-3.
 
-   Some files (i.e. "dat.wfn"), will be generated in the directory "dir-wfn" qeirreps reads these files in the latter step.
+   Eight files including "dat.wfn" will be generated in the directory "dir-wfn". qeirreps reads these files in step 4.
 
 
 2. Running qeirreps 
 
-   Create a directory named "output" in the directory "DIRECTORY_NAME" referred in 1-3.
+   Go to the work directory (referred to as "DIRECTRY_NAME" in 1-3).   Create a directory named "output" if it does not exist. 
    Run qeirreps by typing as 
 
    $ PATH_OF_qeirreps/qeirreps.x DIRECTORY_NAME

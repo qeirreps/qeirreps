@@ -7,7 +7,6 @@ Here, qeirreps/pseudo is the directory which stores the pseudo potentials.
 
 These pseudo potentials are available in Pseudo Dojo "http://www.pseudo-dojo.org".
 For the usage of qeirreps, norm-conserving calculations are necessary.
-The type of pseudo potentials must be Optimized Norm-Conserving Vanderbilt Pseudopotential.
 
 
 ======================================
