@@ -51,16 +51,16 @@ Use original functions of QE as follows.
    (e.g., outdir='./work/band')
 
    Copy the output files of scf calculation to the reading directory of "PbPt3.band.in".
-   (i.e., cp -r ./work/scf/* ./work/band/)
+   (e.g., cp -r ./work/scf/* ./work/band/)
 
    Run "pw.x" in QE with the input file "PbPt3.band.in".
 
 3. band calculation by QE
 
    Set "outdir" in "PbPt3.bands.in".
-   (i.e., outdir='./work/band')
+   (e.g., outdir='./work/band')
 
-   Run "band.x" in QE with the input file "PbPt3.bands.in".
+   Run "bands.x" in QE with the input file "PbPt3.bands.in".
 
    "PbPt3.band", "PbPt3.band.gnu", "PbPt3.band.rap" will be generated.
 
@@ -90,8 +90,8 @@ Use QE, qe2respack, and qeirreps as follows.
    Set "outdir" in "PbPt3.rep.in".
    (e.g., outdir='./work/rep')
 
-   Copy the output files of scf calculation to the reading directory of "PbPt3.band.in"
-   (i.e., cp -r ./work/scf/* ./work/rep/)
+   Copy the output files of scf calculation to the reading directory of "PbPt3.rep.in"
+   (e.g., cp -r ./work/scf/* ./work/rep/)
 
    Run "pw.x" in QE with the input file "PbPt3.rep.in".
 
@@ -101,7 +101,7 @@ Use QE, qe2respack, and qeirreps as follows.
 
    	$ PATH_OF_qe2respack/qe2respack OUTDIR/PREFIX.save
 
-   (i.e. "~/respackDev-master/util/qe2respack/qe2respack ./work/rep/PbPt3.save")
+   (e.g. "~/respackDev-master/util/qe2respack/qe2respack ./work/rep/PbPt3.save")
 
    "PATH_OF_qe2respack" is the directory which has executable file of qe2respack.
    "OUTDIR/PREFIX.save" is the directory produced by QE in step 2.
@@ -118,7 +118,7 @@ Use QE, qe2respack, and qeirreps as follows.
    "../../src/" is the location of the qeirreps executable file.
    "." is the current directory "PbPt3_soc" which contains "dir-wfn" and "output", and "qeirreps.log" is the log file of standard output.
 
-   Some text files will be exported in "output", for example, "character_import.txt".
-   Check the document in reference directory "qeirreps/reference/README_ref.txt" for more information.
+   Some text files will be exported in "output", for example, "character.dat".
+   Check the document and files in reference directory for more information.
 
 ======================================

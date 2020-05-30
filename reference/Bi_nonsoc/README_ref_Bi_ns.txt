@@ -12,7 +12,7 @@ See also qeirreps/example/Bi_nonsoc to test the calculation processes.
 
 Bi.scf.in, Bi.band.in, Bi.bands.in, Bi.rep.in:
 The input files of QE
-Check detailed information in qeirreps/example/Bi_nonsoc
+Check detailed information in example/Bi_nonsoc
 
 Bi.scf.out:
 The log file of QE for self-consistent first-principles (scf) calculation
@@ -63,7 +63,7 @@ This contains following information.
 The output files of qeirreps are in "output".
 
 There are two types of files, "*.dat" and "*_import.txt".
-The files named "*.dat" .
+The files named "*.dat" are ordinary output files.
 The files named "*_import.txt" are constructed for Mathematica usage.
 
 
@@ -115,7 +115,7 @@ The files named "*_import.txt" are constructed for Mathematica usage.
      These indices correspond to the numbers produced in standard output, pg.dat, tg.dat, and srg.dat. Check them to confirm the symmetry operations.
 
 1-5. factor_system_spin.dat:
-     The spin part of the factor system of G_k/T on each k-point.
+     The factor system of G_k on each k-point.
 
      k-points are described in the crystalline coordinate like
 
@@ -123,7 +123,7 @@ The files named "*_import.txt" are constructed for Mathematica usage.
 
      The factor system on each k-point is described as a matrix.
      Each row and column represents the index of symmetry operators produced in standard output, pg.dat, tg.dat, and srg.dat. Check them to confirm the symmetry operations.
-     If the symmetry operator does not belong to G_k/T, the value of factor system is described as zero.
+     If the symmetry operator does not belong to G_k, the value of factor system is described as zero.
 
 
 2. For Mathematica usage, "*_import.txt"
@@ -154,7 +154,7 @@ The files named "*_import.txt" are constructed for Mathematica usage.
    		          If the j-th symmetry is not an element of G_k on the i-th k-point, this value becomes "Null".
    
 2-5. factor_system_spin_import.txt: imported to "factorSystemSpin".
-     The spin part of the factor system of G_k/T on each k-point.
+     The factor system of G_k on each k-point.
 
      factorSystemSpin[[i,1]]: The 3 dimensional k-vector of the i-th k-point in the crystalline coordinate.
      factorSystemSpin[[i,2,m,n]]: The factor system between m-th and n-th symmetry operators.

@@ -56,7 +56,7 @@ PbPt3:
 symmetry group: Pm-3m (#221), symmorphic
 One of the candidate for a topological semimetal.
 The symmetry-based indicator is related to inversion, rotoinversion, and the mirror symmetry.
-Z4 and Z8 indices can be evaluated from the result of qeirreps:(z4, z8) = (3,6).
+Z4 and Z8 indices can be evaluated from the result of qeirreps: (z4, z8) = (3,6).
 REMARK: This Z4 index is different from those of bismuth and silicon.
 
 

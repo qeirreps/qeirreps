@@ -91,24 +91,26 @@ The example directory is also helpful as tutorial. See "example/README_ex.txt" a
    REMARK:
    Norm-conserving calculations are necessary.
    Set the option "wf_collect = .TRUE."
-   Use the pseudo potentials optimized for norm-conserving calculations. See README_psd in the directory "pseudo" for detailed information.
+   Use the pseudo potentials optimized for norm-conserving calculations. See "pseudo\README_psd.txt" for detailed information.
 
 1-3: carried out by qe2respack.
    The output files in OUTDIR/PREFIX.save should be converted by qe2respack into the form of input files of qeirreps.
-   Go to the work directory (referred to as "DIRECTRY_NAME" in the following).   Create a directory named "dir-wfn" if it does not exist. 
+   Go to the work directory (referred to as "DIRECTRY_NAME" in the following).
+   Create a directory named "dir-wfn" if it does not exist. 
    Type as follows at the directory "DIRECTORY_NAME".
 
    $ PATH_OF_qe2respack/qe2respack OUTDIR/PREFIX.save
 
    "PATH_OF_qe2respack" is the directory which has executable file of qe2respack.
-   "OUTDIR/PREFIX.save" is the directory produced by QE in step 1-2 and 1-3.
+   "OUTDIR/PREFIX.save" is the directory produced by QE in step 1-2.
 
-   Eight files including "dat.wfn" will be generated in the directory "dir-wfn". qeirreps reads these files in step 4.
+   Eight files including "dat.wfn" will be generated in the directory "dir-wfn". qeirreps reads these files in step 2.
 
 
 2. Running qeirreps 
 
-   Go to the work directory (referred to as "DIRECTRY_NAME" in 1-3).   Create a directory named "output" if it does not exist. 
+   Go to the work directory (referred to as "DIRECTRY_NAME" in 1-3).
+   Create a directory named "output" if it does not exist. 
    Run qeirreps by typing as 
 
    $ PATH_OF_qeirreps/qeirreps.x DIRECTORY_NAME
@@ -116,8 +118,8 @@ The example directory is also helpful as tutorial. See "example/README_ex.txt" a
    "PATH_OF_qeirreps" is the location of the qeirreps executable file.
    "DIRECTORY_NAME" is the directory referred in 1-3, which contains "dir-wfn" and "output".
 
-   Some text files will be exported in "output", for example, "character_import.txt".
-   Check the document in reference directory "qeirreps/reference/README_ref.txt" for more information.
+   Some text files will be exported in "output", for example, "character.dat".
+   Check the document and files in reference directory for more information.
 
    For materials with inversion symmetry, qeirreps can also evaluate the Z4 index.
    An option of filling should be added to the command as 
@@ -125,9 +127,10 @@ The example directory is also helpful as tutorial. See "example/README_ex.txt" a
    $ PATH_OF_qeirreps/qeirreps.x DIRECTORY_NAME FILLING
 
    "FILLING" is the number of electrons per unit cell of the target material.
-   This filling is shown in the standard output of scf calculation by QE as "number of electrons = FILLING"
+   This filling is shown in the standard output of scf calculation by QE as "number of electrons = FILLING".
 
    Z4 index will be exported as "z4.dat" in the directory "output".
  
 
 ======================================
+
