@@ -1,12 +1,17 @@
 program Main
   implicit none
-  integer :: cmdcount, Nk_irr, NBAND, ncomp, nsymq, nnp, ik, ib, jb, ic, ig, iop, i, j, maxNGp, maxNGI, tmpkg(3), iinv,filling
+  integer :: cmdcount, Nk_irr, NBAND, ncomp, nsymq, nnp, &
+       ik, ib, jb, ic, ig, iop, i, j, &
+       maxNGp, maxNGI, tmpkg(3), iinv, filling
   real(8) :: Ecut_for_psi, FermiEnergy, Etot, a1(3), a2(3), a3(3)
   logical :: flag,flag_fill
   character(150) :: data_dir,data_fill
-  integer, allocatable ::  NGI(:), KGI(:,:,:), rg(:,:,:), pg(:,:),NG_for_psi(:), tfkg(:,:,:), nband_occ(:), degeneracy(:,:), energy_level(:),Gshift(:,:,:)
+  integer, allocatable ::  NGI(:), KGI(:,:,:), rg(:,:,:), pg(:,:),&
+       NG_for_psi(:), tfkg(:,:,:), nband_occ(:), &
+       degeneracy(:,:), energy_level(:),Gshift(:,:,:)
   real(8), allocatable :: SKI(:,:), E_EIGI(:,:), tr(:,:,:)
-  complex(8), allocatable :: CO(:,:,:,:),repmat(:,:,:,:),chrct(:,:,:), sr(:,:,:),phase(:,:,:),kphase(:,:),facsys(:,:,:),facsys_spin(:,:,:)
+  complex(8), allocatable :: CO(:,:,:,:),repmat(:,:,:,:),chrct(:,:,:), &
+       sr(:,:,:),phase(:,:,:),kphase(:,:),facsys_spin(:,:,:)
   logical, allocatable :: gk(:,:)
 
   maxNGp = 0
@@ -21,7 +26,7 @@ program Main
 
   cmdcount=command_argument_count()
   if(cmdcount == 0)then
-     stop"please specify a directory"
+     stop "please specify a directory"
   else if(cmdcount == 1)then
      flag_fill=.false.
      call get_command_argument(1,data_dir)
@@ -35,7 +40,7 @@ program Main
      print*,"reading:"//trim(data_dir)
      print*,"filling:",filling
   else
-     stop"please specify single directory and filling"
+     stop "please specify single directory and filling"
   end if
   
 
@@ -109,14 +114,6 @@ program Main
   allocate(CO(ncomp,maxNGI,NBAND,Nk_irr))
   CO=0.0d0
 
-!  do ik=1,Nk_irr
-!     do ib=1,NBAND 
-!        do ic=1,ncomp
-!           read(102)(CO(ic,i,ib,ik),i=1,NGI(ik))
-!        end do
-!     end do
-!  end do
-
   do ik=1,Nk_irr
      do ib =1,NBAND
         read(102) ((CO(ic,i,ib,ik),i=1,NGI(ik)),ic=1,ncomp)
@@ -182,25 +179,22 @@ program Main
   allocate(phase(maxNGp,Nk_irr,nsymq))
   call get_transformed_G(Nk_irr,nsymq,maxNGp,NG_for_psi,KGI,gk,Gshift,pg,nnp,tfkg,phase)
 
-  allocate(repmat(NBAND,NBAND,Nk_irr,ncomp*nsymq))
+  allocate(repmat(NBAND,NBAND,Nk_irr,nsymq))
   call representation_matrix(Nk_irr,nsymq,ncomp,maxNGI,NBAND,nband_occ,NGI,SKI,kphase,tfkg,phase,sr,CO,repmat)
 !  call repmat_out(Nk_irr,nsymq,ncomp,maxNGI,NBAND,nband_occ,NGI,SKI,repmat)
 
 
-  allocate(facsys(Nk_irr,nsymq,nsymq))
   allocate(facsys_spin(Nk_irr,nsymq,nsymq))
-  call get_factor_system(Nk_irr,nsymq,SKI,tr,pg,nnp,gk,facsys)
   call get_spin_factor_system(Nk_irr,nsymq,tr,gk,sr,facsys_spin)
-  call factor_system_out(Nk_irr,nsymq,gk,SKI,facsys,facsys_spin,data_dir)
+  call factor_system_out(Nk_irr,nsymq,gk,SKI,facsys_spin,data_dir)
   
 
 !  call kgroup_out(Nk_irr,nsymq,SKI,gk,data_dir)
 
-  allocate(chrct(Nk_irr,ncomp*nsymq,maxval(energy_level)))
+  allocate(chrct(Nk_irr,nsymq,maxval(energy_level)))
   call get_character(Nk_irr,nsymq,ncomp,NBAND,energy_level,degeneracy,repmat,chrct)
   call character_out(Nk_irr,nsymq,ncomp,NBAND,energy_level,degeneracy,SKI,gk,chrct,data_dir)
 
-!  if(flag_fill) call get_kappa1(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
   if(flag_fill) call get_z4(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
 
   print*,"================="
@@ -220,7 +214,7 @@ program Main
   deallocate(gk); deallocate(Gshift); deallocate(kphase)
   deallocate(tr); deallocate(sr)
   deallocate(degeneracy); deallocate(energy_level)
-  deallocate(facsys); deallocate(facsys_spin)
+  deallocate(facsys_spin)
   deallocate(repmat); deallocate(chrct)
 
 
@@ -481,10 +475,6 @@ contains
 
     a(:,:)=lat(:,:)
 
-!    print*,"================="
-!    print*,"space group symmetry:"
-!    print*,""
-!    print*,"rotation part:"
     
     call dgetrf(n,n,a,lda,ipiv,info)
     
@@ -522,15 +512,6 @@ contains
        
     end do
     
-
-!    do iop=1,nsymq
-!       print*, iop
-!       print'(3f6.2)',tr(1,:,iop)
-!       print'(3f6.2)',tr(2,:,iop)
-!       print'(3f6.2)',tr(3,:,iop)
-!       print*,""
-!    end do
-
     OPEN(11,FILE=trim(data_dir)//"/output/pg.dat",status="replace")
 
     do iop=1,nsymq
@@ -547,7 +528,9 @@ contains
 
     write(12,fmt='(a)',advance='no')"{"
     do iop=1,nsymq
-       write(12,'("{{",1f12.8,",",1f12.8,",",1f12.8,"},{",1f12.8,",",1f12.8,",",1f12.8,"},{",1f12.8,",",1f12.8,",",1f12.8,"}}")',advance='no') tr(1,:,iop),tr(2,:,iop),tr(3,:,iop)
+       write(12,'("{{",1f12.8,",",1f12.8,",",1f12.8,"}, &
+            & {",1f12.8,",",1f12.8,",",1f12.8,"},{",1f12.8,",",1f12.8,",",1f12.8,"}}")' &
+            & ,advance='no') tr(1,:,iop),tr(2,:,iop),tr(3,:,iop)
        if(iop/=nsymq)then
           write(12,fmt='(a)',advance='no')","
        end if
@@ -568,14 +551,6 @@ contains
     
     integer :: i, j, iop
 
-!    print*,"translation part:"
-    
-
-!    do iop=1,nsymq
-!       print*,iop
-!       print'(1I3,"/",1I3," ",1I3,"/",1I3," ",1I3,"/",1I3)',pg(1,iop),nnp,pg(2,iop),nnp,pg(3,iop),nnp
-!       print*,""
-!    end do
 
     OPEN(11,FILE=trim(data_dir)//"/output/tg.dat",status="replace")
 
@@ -591,7 +566,8 @@ contains
 
     write(12,fmt='(a)',advance='no')"{"
     do iop=1,nsymq
-       write(12,'("{",1I3,"/",1I3,",",1I3,"/",1I3,",",1I3,"/",1I3,"}")',advance='no') pg(1,iop),nnp,pg(2,iop),nnp,pg(3,iop),nnp
+       write(12,'("{",1I3,"/",1I3,",",1I3,"/",1I3,",",1I3,"/",1I3,"}")' &
+            ,advance='no') pg(1,iop),nnp,pg(2,iop),nnp,pg(3,iop),nnp
        if(iop/=nsymq)then
           write(12,fmt='(a)',advance='no')","
        end if
@@ -635,7 +611,6 @@ contains
     id(1,1)=1d0; id(2,2)=1d0; id(3,3)=1d0
     inv(1,1)=-1d0; inv(2,2)=-1d0; inv(3,3)=-1d0
 
-!    print*,'spin rotation part:'
     
     do iop=1,nsymq
        tmp1=0d0; tmp2=0d0
@@ -717,14 +692,6 @@ contains
 
     deallocate(a); deallocate(rwork); deallocate(w)
 
-
-!    do iop=1,nsymq
-!       print*, iop
-!       print'(4f10.6)', sr(1,:,iop)
-!       print'(4f10.6)', sr(2,:,iop)
-!       print*,""
-!    end do
-
     OPEN(11,FILE=trim(data_dir)//"/output/srg.dat",status="replace")
 
     do iop=1,nsymq
@@ -740,7 +707,9 @@ contains
 
     write(12,fmt='(a)',advance='no')"{"
     do iop=1,nsymq
-       write(12,'("{{",1f12.8,"+(",1f12.8," I),",1f12.8,"+(",1f12.8," I)},{",1f12.8,"+(",1f12.8," I),",1f12.8,"+(",1f12.8," I)}}")',advance='no') sr(1,:,iop),sr(2,:,iop)
+       write(12,'("{{",1f12.8,"+(",1f12.8," I),",1f12.8,"+(",1f12.8," I)},&
+            & {",1f12.8,"+(",1f12.8," I),",1f12.8,"+(",1f12.8," I)}}")'&
+            & ,advance='no') sr(1,:,iop),sr(2,:,iop)
        if(iop/=nsymq) write(12,fmt='(a)',advance='no')","
     end do
     write(12,fmt='(a)',advance='no')"}"
@@ -808,7 +777,6 @@ contains
           end if
        end do
        energy_level(ik) = count-1
-!       print*,ik,(sum(degeneracy(:,ik))==nband_occ(ik)),sum(degeneracy(:,ik)),nband_occ(ik)
     end do
 
   end subroutine get_degeneracy
@@ -872,34 +840,7 @@ contains
                &(abs(tmp(2)-Gshift(2,ik,iop))<err).and.&
                &(abs(tmp(3)-Gshift(3,ik,iop))<err)
 
-       end do
-
-       !option for calculating representation of G_k/T, not G_k
-       !from here
-       
-!       flag=.false.
-
-!       do iop=1,nsymq
-!          do jop=1,nsymq
-
-!             tmp2(1)=sum(rg(1,:,iop)*pg(:,jop))
-!             tmp2(2)=sum(rg(2,:,iop)*pg(:,jop))
-!             tmp2(3)=sum(rg(3,:,iop)*pg(:,jop))
-
-!             if(gk(ik,iop).and.gk(ik,jop).and.mod(sum(Gshift(:,ik,iop)*tmp2(:)),nnp)/=0)then
-!                print*,"k:",ik
-!                do kop=1,nsymq
-!                   kphase(ik,kop)=exp(-ii*sum(SKI(:,ik)*pg(:,kop))*2*pi/nnp)
-!                end do
-!                flag=.true.
-!                exit
-!             end if
-!          end do
-!          if(flag)exit
-!       end do
-
-       !to here
-       
+       end do       
     end do
 
     do ik=1,Nk_irr
@@ -913,7 +854,8 @@ contains
     
   subroutine get_transformed_G(Nk_irr,nsymq,maxNGp,NG_for_psi,KGI,gk,Gshift,pg,nnp,tfkg,phase)
     implicit none
-    integer,intent(in) :: Nk_irr,nsymq,maxNGp,NG_for_psi(Nk_irr),KGI(3,maxNGp,Nk_irr),Gshift(3,Nk_irr,nsymq), pg(3,nsymq), nnp
+    integer,intent(in) :: Nk_irr,nsymq,maxNGp,NG_for_psi(Nk_irr),KGI(3,maxNGp,Nk_irr), &
+         Gshift(3,Nk_irr,nsymq), pg(3,nsymq), nnp
     logical,intent(in) :: gk(Nk_irr,nsymq)
     integer,intent(out) :: tfkg(maxNGp,nk_irr,nsymq)
     complex(8),intent(out) :: phase(maxNGp,Nk_irr,nsymq)
@@ -962,37 +904,6 @@ contains
     end do
   end subroutine get_transformed_G
 
-  subroutine get_factor_system(Nk_irr,nsymq,SKI,tr,pg,nnp,gk,facsys)
-    implicit none
-    integer,intent(in) :: Nk_irr, nsymq,pg(3,nsymq),nnp
-    real(8),intent(in) :: tr(3,3,nsymq),SKI(3,Nk_irr)
-    logical,intent(in) :: gk(Nk_irr,nsymq)
-    complex(8),intent(out) :: facsys(Nk_irr,nsymq,nsymq)
-    
-    integer :: ik,iop,jop
-    real(8) :: tmp(3)
-    real(8),parameter :: pi = acos(-1d0)
-    complex(8),parameter :: ii = (0,1)
-    
-    facsys=0d0
-    tmp=0d0
-    
-    do ik=1,Nk_irr
-       do iop=1,nsymq
-          if(gk(ik,iop))then
-             do jop=1,nsymq
-                if(gk(ik,jop))then
-                   tmp(1)=sum(tr(1,:,iop)*pg(:,jop))
-                   tmp(2)=sum(tr(2,:,iop)*pg(:,jop))
-                   tmp(3)=sum(tr(3,:,iop)*pg(:,jop))
-                   facsys(ik,iop,jop)=exp(-ii*sum(SKI(:,ik)*(tmp(:)-pg(:,jop)))*2*pi/nnp)
-                end if
-             end do
-          end if
-       end do
-    end do
-                   
-  end subroutine get_factor_system
 
   subroutine get_spin_factor_system(Nk_irr,nsymq,tr,gk,sr,facsys_spin)
     implicit none
@@ -1046,12 +957,15 @@ contains
   end subroutine get_spin_factor_system
 
   
-  subroutine representation_matrix(Nk_irr,nsymq,ncomp,maxNGI,NBAND,nband_occ,NGI,SKI,kphase,tfkg,phase,sr,CO,repmat)
+  subroutine representation_matrix(Nk_irr,nsymq,ncomp,maxNGI,NBAND,nband_occ,&
+       NGI,SKI,kphase,tfkg,phase,sr,CO,repmat)
     implicit none
-    integer,intent(in) :: Nk_irr,nsymq,ncomp,maxNGI,NBAND,nband_occ(Nk_irr),NGI(Nk_irr),tfkg(maxNGI,Nk_irr,nsymq)
+    integer,intent(in) :: Nk_irr,nsymq,ncomp,maxNGI,NBAND,nband_occ(Nk_irr),&
+         NGI(Nk_irr),tfkg(maxNGI,Nk_irr,nsymq)
     real(8),intent(in) :: SKI(3,Nk_irr)
-    complex(8),intent(in) ::  sr(2,2,nsymq),CO(ncomp,maxNGI,NBAND,Nk_irr),kphase(Nk_irr,nsymq),phase(maxNGI,Nk_irr,nsymq)
-    complex(8),intent(out) :: repmat(NBAND,NBAND,Nk_irr,ncomp*nsymq)
+    complex(8),intent(in) ::  sr(2,2,nsymq),CO(ncomp,maxNGI,NBAND,Nk_irr),&
+         kphase(Nk_irr,nsymq),phase(maxNGI,Nk_irr,nsymq)
+    complex(8),intent(out) :: repmat(NBAND,NBAND,Nk_irr,nsymq)
 
     complex(8) :: tmp(2,maxNGI)
 
@@ -1067,20 +981,18 @@ contains
                 tmp=0d0
 
                 if(ncomp==1)then
-                   repmat(ib,jb,ik,iop)=sum(conjg(CO(1,1:NGI(ik),ib,ik))*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik)*phase(1:NGI(ik),ik,iop))*kphase(ik,iop)
+                   repmat(ib,jb,ik,iop)=sum(conjg(CO(1,1:NGI(ik),ib,ik))*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik)&
+                        *phase(1:NGI(ik),ik,iop))*kphase(ik,iop)
                 else if(ncomp==2)then
-                   tmp(1,1:NGI(ik))=(sr(1,1,iop)*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik) + sr(1,2,iop)*CO(2,tfkg(1:NGI(ik),ik,iop),jb,ik))*phase(1:NGI(ik),ik,iop)*kphase(ik,iop)
-                   tmp(2,1:NGI(ik))=(sr(2,1,iop)*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik) + sr(2,2,iop)*CO(2,tfkg(1:NGI(ik),ik,iop),jb,ik))*phase(1:NGI(ik),ik,iop)*kphase(ik,iop)
+                   tmp(1,1:NGI(ik))=(sr(1,1,iop)*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik) &
+                        + sr(1,2,iop)*CO(2,tfkg(1:NGI(ik),ik,iop),jb,ik)) &
+                        *phase(1:NGI(ik),ik,iop)*kphase(ik,iop)
+                   tmp(2,1:NGI(ik))=(sr(2,1,iop)*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik) &
+                        + sr(2,2,iop)*CO(2,tfkg(1:NGI(ik),ik,iop),jb,ik)) &
+                        *phase(1:NGI(ik),ik,iop)*kphase(ik,iop)
 
                    repmat(ib,jb,ik,iop)=sum(conjg(CO(1,1:NGI(ik),ib,ik))*tmp(1,1:NGI(ik)))+&
-                        &sum(conjg(CO(2,1:NGI(ik),ib,ik))*tmp(2,1:NGI(ik)))
-                   
-                   tmp=0d0
-                   tmp(1,1:NGI(ik))=(sr(1,1,iop+nsymq)*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik) + sr(1,2,iop+nsymq)*CO(2,tfkg(1:NGI(ik),ik,iop),jb,ik))*phase(1:NGI(ik),ik,iop)*kphase(ik,iop)
-                   tmp(2,1:NGI(ik))=(sr(2,1,iop+nsymq)*CO(1,tfkg(1:NGI(ik),ik,iop),jb,ik) + sr(2,2,iop+nsymq)*CO(2,tfkg(1:NGI(ik),ik,iop),jb,ik))*phase(1:NGI(ik),ik,iop)*kphase(ik,iop)
-
-                   repmat(ib,jb,ik,iop+nsymq)=sum(conjg(CO(1,1:NGI(ik),ib,ik))*tmp(1,1:NGI(ik)))+&
-                        &sum(conjg(CO(2,1:NGI(ik),ib,ik))*tmp(2,1:NGI(ik)))
+                        sum(conjg(CO(2,1:NGI(ik),ib,ik))*tmp(2,1:NGI(ik)))
                 end if
 
              end do
@@ -1092,65 +1004,16 @@ contains
   end subroutine representation_matrix
 
   
-  subroutine factor_system_out(Nk_irr,nsymq,gk,SKI,facsys,facsys_spin,data_dir)
+  subroutine factor_system_out(Nk_irr,nsymq,gk,SKI,facsys_spin,data_dir)
     implicit none
     integer,intent(in) :: Nk_irr,nsymq
     logical,intent(in) :: gk(Nk_irr,nsymq)
     real(8),intent(in) :: SKI(3,Nk_irr)
-    complex(8),intent(in) :: facsys(Nk_irr,nsymq,nsymq),facsys_spin(Nk_irr,nsymq,nsymq)
+    complex(8),intent(in) :: facsys_spin(Nk_irr,nsymq,nsymq)
     character(150),intent(in) :: data_dir
     
     integer :: ik,iop,jop
     
-!    OPEN(20,FILE=trim(data_dir)//"/output/factor_system_nonsymmorphic_import.txt",status="replace")
-    
-!    write(20,fmt='(a)',advance='no')"{"
-
-!    do ik=1,Nk_irr
-!       write(20,fmt='("{{",1f8.5,",",1f8.5,",",1f8.5,"},")',advance='no')SKI(:,ik)
-!       write(20,fmt='(a)',advance='no')"{"
-!       do iop=1,nsymq
-!          write(20,fmt='(a)',advance='no')"{"
-!          do jop=1,nsymq
-!             if(gk(ik,iop).and.gk(ik,jop))then
-!                write(20,fmt='(1f8.5,"+(",1f8.5,")I")',advance='no')facsys(ik,iop,jop)
-!             else
-!                write(20,fmt='("Null")',advance='no')
-!             end if
-!             if(jop/=nsymq)then
-!                write(20,fmt='(a)',advance='no')","
-!             end if
-!          end do
-!          write(20,fmt='(a)',advance='no')"}"
-!          if(iop/=nsymq)then
-!             write(20,fmt='(a)',advance='no')","
-!          end if
-!       end do
-!       
-!       write(20,fmt='(a)',advance='no')"}}"
-!       if(ik/=Nk_irr)then
-!          write(20,fmt='(a)',advance='no')","
-!       end if
-!    end do
-!    write(20,fmt='(a)',advance='no')"}"
-    
-!    close(20)
-
-!    OPEN(21,FILE=trim(data_dir)//"/output/factor_system_nonsymmorphic.dat",status="replace")
-!
-!    do ik=1,Nk_irr
-!       write(21,fmt='("k=(",1f8.5,",",1f8.5,",",1f8.5,"),")')SKI(:,ik)
-!       write(21,*)""
-!       do iop=1,nsymq
-!          do jop=1,nsymq
-!             write(21,fmt='(" ",1f8.5,"+(",1f8.5,")i ")',advance='no')facsys(ik,iop,jop)
-!          end do
-!          write(21,*)
-!       end do
-!       write(21,*)
-!    end do
-!
-!    close(21)
     
     OPEN(23,FILE=trim(data_dir)//"/output/factor_system_spin_import.txt",status="replace")
     
@@ -1209,8 +1072,8 @@ contains
   subroutine get_character(Nk_irr,nsymq,ncomp,NBAND,energy_level,degeneracy,repmat,chrct)
     implicit none
     integer,intent(in) :: Nk_irr, nsymq, ncomp, NBAND, energy_level(Nk_irr), degeneracy(NBAND,Nk_irr)
-    complex(8),intent(in) :: repmat(NBAND,NBAND,Nk_irr,ncomp*nsymq)
-    complex(8),intent(out) :: chrct(Nk_irr,ncomp*nsymq,maxval(energy_level))
+    complex(8),intent(in) :: repmat(NBAND,NBAND,Nk_irr,nsymq)
+    complex(8),intent(out) :: chrct(Nk_irr,nsymq,maxval(energy_level))
 
     integer :: ik, iop, j, k, count 
 
@@ -1218,7 +1081,7 @@ contains
     count = 0
 
     do ik=1,Nk_irr
-       do iop=1,ncomp*nsymq
+       do iop=1,nsymq
           count = 0
           do j=1,energy_level(ik)
              do k=1,degeneracy(j,ik)
@@ -1231,55 +1094,14 @@ contains
     end do
 
   end subroutine get_character
-
   
-  subroutine get_kappa1(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
-    implicit none
-    integer,intent(in) :: Nk_irr, nsymq, ncomp, NBAND, iinv, filling, energy_level(Nk_irr), degeneracy(NBAND,Nk_irr)
-    logical,intent(in) :: gk(Nk_irr,nsymq)
-    complex(8),intent(in) :: chrct(Nk_irr,ncomp*nsymq,maxval(energy_level))
-
-    integer :: ik, il, count, occ
-    real(8) :: kappa1
-
-    kappa1 = 0d0
-    count = 0
-    occ = 0
-
-    do ik=1,Nk_irr
-       if(gk(ik,iinv))then
-          count = count+1
-          do il=1,energy_level(ik)
-             if(filling<=sum(degeneracy(1:il,ik)))then
-                occ=il
-                exit
-             end if
-          end do
-          
-          kappa1 = kappa1 + sum(chrct(ik,iinv,1:occ))
-       end if
-    end do
-
-    print*,"================="
-    print*,""
-    print*,"summation of parities for",count,"k-points"
-    print*,kappa1
-
-    OPEN(20,FILE=trim(data_dir)//"/output/sum_parities.dat",status="replace")
-
-    write(20,*),"summation of parities for",count,"k-points"
-    write(20,*),kappa1    
-    
-    CLOSE(20)
-
-  end subroutine get_kappa1
-
 
   subroutine get_z4(Nk_irr,nsymq,ncomp,NBAND,iinv,filling,gk,energy_level,degeneracy,chrct)
     implicit none
-    integer,intent(in) :: Nk_irr, nsymq, ncomp, NBAND, iinv, filling, energy_level(Nk_irr), degeneracy(NBAND,Nk_irr)
+    integer,intent(in) :: Nk_irr, nsymq, ncomp, NBAND, iinv, filling, &
+         energy_level(Nk_irr), degeneracy(NBAND,Nk_irr)
     logical,intent(in) :: gk(Nk_irr,nsymq)
-    complex(8),intent(in) :: chrct(Nk_irr,ncomp*nsymq,maxval(energy_level))
+    complex(8),intent(in) :: chrct(Nk_irr,nsymq,maxval(energy_level))
 
     integer :: ik, il, count, occ, deno=4
     real(8) :: total, err = 1d-6
@@ -1294,16 +1116,25 @@ contains
           count=count+1
        end if
     end do
-    
-    if(count.lt.8)then
 
+    if(iinv.lt.1)then
+       print*,"================="
+       print*,""
+       print*,"Error:"
+       print*,"There is no inversion symmetry. z4 index cannot be computed."
+       print*,"You should not specify the filling for the system without inversion symmetry."
+
+       stop
+    
+    else if(count.lt.8)then
+ 
        print*,"================="
        print*,""
        print*,"Error:"
        print*,"Only",count,"/ 8 TRIMs are found. Please specify all 8 TRIMs."
 
        stop
-       
+      
     else if(count.gt.8)then
 
        print*,"================="
@@ -1334,11 +1165,9 @@ contains
 
        print*,"================="
        print*,""
-       print*,"Error:"
-       print*,"sum of parities is not a integer number"
-       print*,"sum of parities:",total
-             
-       stop 
+       print*,"Warning:"
+       print*,"sum of parities is not an integer number"
+       print*,"sum of parities:",total 
        
     end if
 
@@ -1371,7 +1200,7 @@ contains
     integer,intent(in) :: Nk_irr,nsymq,ncomp,NBAND,energy_level(Nk_irr),degeneracy(NBAND,Nk_irr)
     logical,intent(in) :: gk(Nk_irr,nsymq)
     real(8),intent(in) :: SKI(3,Nk_irr)
-    complex(8),intent(in) :: chrct(Nk_irr,ncomp*nsymq,maxval(energy_level))
+    complex(8),intent(in) :: chrct(Nk_irr,nsymq,maxval(energy_level))
     character(150),intent(in) :: data_dir
     
     integer :: ik,iop,ib
@@ -1387,13 +1216,13 @@ contains
        do ib=1,energy_level(ik)
           write(20,fmt='(a)',advance='no')"{"
 
-          do iop=1,ncomp*nsymq
+          do iop=1,nsymq
              if((gk(ik,iop).and.iop.le.nsymq).or.(gk(ik,iop-nsymq).and.iop.gt.nsymq))then
                 write(20,fmt='(1f8.5,"+(",1f8.5,")I")',advance='no')chrct(ik,iop,ib)
              else
                 write(20,fmt='("Null")',advance='no')
              end if
-             if(iop/=ncomp*nsymq)then
+             if(iop/=nsymq)then
                 write(20,fmt='(a)',advance='no')","
              end if
           end do

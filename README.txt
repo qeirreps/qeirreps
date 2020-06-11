@@ -130,6 +130,12 @@ The example directory is also helpful as tutorial. See "example/README_ex.txt" a
    This filling is shown in the standard output of scf calculation by QE as "number of electrons = FILLING".
 
    Z4 index will be exported as "z4.dat" in the directory "output".
+
+   REMARK:
+   There are some different definitions of Z4 index.
+   Our program qeirreps calculates the Z4 index as shown in equation (4) in the following paper:
+   E. Khalaf, H. C. Po, A. Vishwanath, and H. Watanabe, Phys. Rev. X 8, 031070 (2018) 
+   ( https://journals.aps.org/prx/abstract/10.1103/PhysRevX.8.031070 ) 
  
 
 ======================================
