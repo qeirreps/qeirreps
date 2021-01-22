@@ -1,0 +1,74 @@
+k=( 0.00000, 0.00000, 0.00000),
+number of irreducible representations:  6
+level=  1    0   0   0   1   0   0
+level=  2    0   0   1   0   0   0
+level=  3    0   0   0   0   0   1
+level=  4    1   0   0   0   0   0
+level=  5    0   0   0   0   1   0
+level=  6    0   1   0   0   0   0
+ 
+k=( 0.50000, 0.00000, 0.00000),
+number of irreducible representations:  6
+level=  1    0   0   0   0   1   0
+level=  2    0   0   0   0   0   1
+level=  3    0   0   0   0   1   0
+level=  4    1   1   0   0   0   0
+level=  5    0   0   0   0   0   1
+level=  6    0   0   0   0   0   1
+level=  7    0   0   1   1   0   0
+level=  8    0   0   0   0   1   0
+ 
+k=( 0.00000, 0.50000, 0.00000),
+number of irreducible representations:  6
+level=  1    0   0   0   0   1   0
+level=  2    0   0   0   0   0   1
+level=  3    0   0   0   0   1   0
+level=  4    1   1   0   0   0   0
+level=  5    0   0   0   0   0   1
+level=  6    0   0   0   0   0   1
+level=  7    0   0   1   1   0   0
+level=  8    0   0   0   0   1   0
+ 
+k=( 0.00000, 0.00000, 0.50000),
+number of irreducible representations:  6
+level=  1    0   0   0   0   1   0
+level=  2    0   0   0   0   0   1
+level=  3    0   0   0   0   1   0
+level=  4    1   1   0   0   0   0
+level=  5    0   0   0   0   0   1
+level=  6    0   0   0   0   0   1
+level=  7    0   0   1   1   0   0
+level=  8    0   0   0   0   1   0
+ 
+k=( 0.00000, 0.50000, 0.50000),
+number of irreducible representations:  1
+level=  1    1
+level=  2    1
+level=  3    1
+level=  4    1
+ 
+k=( 0.50000, 0.00000, 0.50000),
+number of irreducible representations:  1
+level=  1    1
+level=  2    1
+level=  3    1
+level=  4    1
+ 
+k=( 0.50000, 0.50000, 0.00000),
+number of irreducible representations:  1
+level=  1    1
+level=  2    1
+level=  3    1
+level=  4    1
+ 
+k=( 0.50000, 0.50000, 0.50000),
+number of irreducible representations:  6
+level=  1    0   0   0   0   0   1
+level=  2    0   0   0   0   1   0
+level=  3    0   0   0   0   0   1
+level=  4    0   0   1   1   0   0
+level=  5    0   0   0   0   1   0
+level=  6    0   0   0   0   1   0
+level=  7    1   1   0   0   0   0
+level=  8    0   0   0   0   0   1
+ 

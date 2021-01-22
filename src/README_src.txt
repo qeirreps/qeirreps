@@ -26,7 +26,7 @@ The setting file for compiling qeirreps.
 1. Edit "Makefile" for your compiling environment.
    Specify the compiler and libraries.
 
-2. Compile qeirreps. Type "make".
+2. Compile qeirreps. Type "make."
    The executable binary "qeirreps.x" will be produced.
 
 ======================================

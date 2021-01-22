@@ -1,0 +1,41 @@
+&CONTROL
+    calculation = 'bands'
+    restart_mode='from_scratch',
+    prefix='Bi'
+    pseudo_dir='../../../pseudo/soc/'
+    outdir='./work/rep/'
+    tstress=.true.
+    tprnfor=.true.
+    wf_collect=.true.
+/
+&SYSTEM
+    ibrav = 0
+    nat = 2
+    ntyp = 1
+    ecutwfc=100.
+    occupations='smearing'
+    smearing='m-p'
+    degauss=0.01
+    use_all_frac=.true.
+    lspinorb=.true.
+    noncolin=.true.
+/
+&ELECTRONS
+    mixing_beta=0.3
+    conv_thr=1.0d-8
+/
+ATOMIC_SPECIES
+Bi	208.9804	Bi.upf
+ATOMIC_POSITIONS angstrom
+Bi  2.30479336  1.330673067  1.153637296
+Bi -0.00000000 -0.000000000  2.838187257
+K_POINTS crystal
+4
+0.0	0.0	0.0	1
+0.0	0.5	0.0	1
+0.5	0.5	0.0	1
+0.5	0.5	0.5	1
+CELL_PARAMETERS angstrom
+    2.3047933600     1.3306730668     3.9918245533
+   -2.3047933600     1.3306730668     3.9918245533
+    0.0000000000    -2.6613461336     3.9918245533

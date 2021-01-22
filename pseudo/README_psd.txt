@@ -3,9 +3,9 @@
 ======================================
 
 
-Here, qeirreps/pseudo is the directory which stores the pseudo potentials.
+Here, qeirreps/pseudo is the directory which stores the pseudopotentials.
 
-These pseudo potentials are available in Pseudo Dojo "http://www.pseudo-dojo.org".
+These pseudopotentials are available in Pseudo Dojo "http://www.pseudo-dojo.org."
 For the usage of qeirreps, norm-conserving calculations are necessary.
 
 
@@ -14,11 +14,11 @@ For the usage of qeirreps, norm-conserving calculations are necessary.
 # Contents
 
 nonsoc:
-pseudo potential for calculation without spin-orbit coupling.
+pseudopotentials for calculation without spin-orbit coupling.
 See detailed information in each "*.upf" file.
 
 soc:
-pseudo potential for calculation with spin-orbit coupling.
+pseudopotentials for calculation with spin-orbit coupling.
 See detailed information in each "*.upf" file.
 
 

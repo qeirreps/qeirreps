@@ -1,0 +1,6 @@
+&bands
+outdir = './work/band/',
+prefix='NaCdAs',
+filband='NaCdAs.band',
+lsym=.true.
+/

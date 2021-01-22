@@ -1,19 +1,17 @@
-mpijob CMD    : mpirun -f /tmp/mpiexec.params.k050801.22599
-mpijob PARAMS : -d
-        /home/k0508/k050801/research/dft/qeirreps/v2/qeirreps/reference/PbPt3_nonsoc
-        r1i0n10 24 omplace -nt 1
-        "/home/k0508/k050801/research/dft/qe-6.2/bin/pw.x"
+mpijob CMD    : mpirun -f /tmp/mpiexec.params.k050801.196931
+mpijob PARAMS : -d /home/k0508/k050801/qeirreps/ver_5/qeirreps/reference/PbPt3_nonsoc
+        r1i5n19 10 omplace -nt 4 "/home/k0508/k050801/qe-6.6/bin/pw.x"
 
 SGI MPT Placement option
 --------------------------
-omplace -nt 1
+omplace -nt 4
 
 Node   MPI
 ------------
-r1i0n10 24
+r1i5n19 10
 
 
-     Program PWSCF v.6.2 (svn rev. 13949:13950) starts on 16Apr2020 at 13:34:20 
+     Program PWSCF v.6.6 starts on 29Nov2020 at 19:14:28 
 
      This program is part of the open-source Quantum ESPRESSO suite
      for quantum simulation of materials; please cite
@@ -23,10 +21,11 @@ r1i0n10 24
      in publications or presentations arising from this work. More details at
      http://www.quantum-espresso.org/quote
 
-     Parallel version (MPI), running on    24 processors
+     Parallel version (MPI), running on    10 processors
 
      MPI processes distributed on     1 nodes
-     R & G space division:  proc/nbgrp/npool/nimage =      24
+     R & G space division:  proc/nbgrp/npool/nimage =      10
+     Fft bands division:     nmany     =       1
      Waiting for input...
      Reading input from standard input
 
@@ -36,18 +35,21 @@ r1i0n10 24
      Max angular momentum in pseudopotentials (lmaxx) =  3
 
      Atomic positions and unit cell read from directory:
-     /work/k0508/k050801/band/PbPt3_ns/PbPt3.save/
+     /work/k0508/k050801/PbPt3_ns/band/PbPt3.save/
+     Atomic positions from file used, from input discarded
  
 
      Subspace diagonalization in iterative solution of the eigenvalue problem:
      a serial algorithm will be used
 
+     Message from routine setup:
+     using ibrav=0 with symmetry is DISCOURAGED, use correct ibrav instead
  
      Parallelization info
      --------------------
      sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
-     Min          80      80     23                 2674     2674     407
-     Max          81      81     24                 2679     2679     410
+     Min         194     194     55                 6422     6422     979
+     Max         195     195     56                 6426     6426     982
      Sum        1941    1941    553                64229    64229    9795
  
 
@@ -61,7 +63,8 @@ r1i0n10 24
      number of Kohn-Sham states=           41
      kinetic-energy cutoff     =     100.0000  Ry
      charge density cutoff     =     400.0000  Ry
-     Exchange-correlation      = PBE ( 1  4  3  4 0 0)
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
 
      celldm(1)=   7.808548  celldm(2)=   0.000000  celldm(3)=   0.000000
      celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
@@ -127,14 +130,14 @@ r1i0n10 24
 
      Dense  grid:    64229 G-vectors     FFT dimensions: (  50,  50,  50)
 
-     Estimated max dynamical RAM per process >      14.30 MB
+     Estimated max dynamical RAM per process >      13.96 MB
 
-     Estimated total dynamical RAM >     343.22 MB
+     Estimated total dynamical RAM >     139.63 MB
 
      The potential is recalculated from file :
-     /work/k0508/k050801/band/PbPt3_ns/PbPt3.save/charge-density.dat
+     /work/k0508/k050801/PbPt3_ns/band/PbPt3.save/charge-density
 
-     Starting wfc are   39 randomized atomic wfcs +    2 random wfc
+     Starting wfcs are   39 randomized atomic wfcs +    2 random wfcs
 
      Band Structure Calculation
      Davidson diagonalization with overlap
@@ -143,59 +146,60 @@ r1i0n10 24
      c_bands:  1 eigenvalues not converged
      c_bands:  1 eigenvalues not converged
      c_bands:  1 eigenvalues not converged
+     c_bands:  1 eigenvalues not converged
+     c_bands:  1 eigenvalues not converged
+     c_bands:  1 eigenvalues not converged
 
-     ethr =  1.47E-11,  avg # of iterations = 20.3
+     ethr =  1.47E-11,  avg # of iterations = 36.4
 
-     total cpu time spent up to now is       93.5 secs
+     total cpu time spent up to now is      134.1 secs
 
      End of band structure calculation
 
      Number of k-points >= 100: set verbosity='high' to print the bands.
 
-     Writing output data file PbPt3.save
+     Writing output data file /work/k0508/k050801/PbPt3_ns/band/PbPt3.save/
  
-     init_run     :      0.10s CPU      0.12s WALL (       1 calls)
-     electrons    :     91.23s CPU     92.99s WALL (       1 calls)
+     init_run     :      0.11s CPU      0.12s WALL (       1 calls)
+     electrons    :    130.41s CPU    133.61s WALL (       1 calls)
 
      Called by init_run:
-     wfcinit      :      0.00s CPU      0.01s WALL (       1 calls)
+     wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
      potinit      :      0.01s CPU      0.01s WALL (       1 calls)
+     hinit0       :      0.03s CPU      0.04s WALL (       1 calls)
 
      Called by electrons:
-     c_bands      :     91.23s CPU     92.99s WALL (       1 calls)
-     v_of_rho     :      0.00s CPU      0.00s WALL (       1 calls)
+     c_bands      :    130.41s CPU    133.61s WALL (       1 calls)
+     v_of_rho     :      0.01s CPU      0.01s WALL (       1 calls)
 
      Called by c_bands:
-     init_us_2    :      0.11s CPU      0.13s WALL (     362 calls)
-     cegterg      :     84.24s CPU     85.46s WALL (     475 calls)
-
-     Called by sum_band:
+     init_us_2    :      0.09s CPU      0.14s WALL (     362 calls)
+     cegterg      :    121.19s CPU    123.82s WALL (     838 calls)
 
      Called by *egterg:
-     h_psi        :     46.00s CPU     47.24s WALL (    8176 calls)
-     g_psi        :      0.35s CPU      0.36s WALL (    7339 calls)
-     cdiaghg      :     32.37s CPU     32.26s WALL (    7701 calls)
+     cdiaghg      :     25.37s CPU     25.53s WALL (   13533 calls)
+     h_psi        :     84.79s CPU     87.31s WALL (   14371 calls)
+     g_psi        :      0.54s CPU      0.54s WALL (   13171 calls)
 
      Called by h_psi:
-     h_psi:pot    :     45.63s CPU     46.94s WALL (    8176 calls)
-     h_psi:calbec :      2.80s CPU      2.78s WALL (    8176 calls)
-     vloc_psi     :     41.03s CPU     42.22s WALL (    8176 calls)
-     add_vuspsi   :      1.76s CPU      1.90s WALL (    8176 calls)
+     h_psi:calbec :      5.08s CPU      5.20s WALL (   14371 calls)
+     vloc_psi     :     74.73s CPU     77.06s WALL (   14371 calls)
+     add_vuspsi   :      4.60s CPU      4.66s WALL (   14371 calls)
 
      General routines
-     calbec       :      2.76s CPU      2.76s WALL (    8176 calls)
-     fft          :      0.03s CPU      0.04s WALL (      11 calls)
-     fftw         :     38.40s CPU     39.43s WALL (  310486 calls)
-     davcio       :      0.18s CPU      0.24s WALL (     724 calls)
+     calbec       :      5.03s CPU      5.16s WALL (   14371 calls)
+     fft          :      0.02s CPU      0.02s WALL (      11 calls)
+     fftw         :     68.87s CPU     71.02s WALL (  477302 calls)
+     davcio       :      0.11s CPU      0.33s WALL (     724 calls)
  
      Parallel routines
-     fft_scatt_xy :      2.93s CPU      3.06s WALL (  310497 calls)
-     fft_scatt_yz :     15.85s CPU     16.30s WALL (  310497 calls)
+     fft_scatt_xy :      7.10s CPU      7.32s WALL (  477313 calls)
+     fft_scatt_yz :     21.94s CPU     22.61s WALL (  477313 calls)
  
-     PWSCF        :  1m41.42s CPU     1m47.49s WALL
+     PWSCF        :   2m12.08s CPU   2m17.40s WALL
 
  
-   This run was terminated on:  13:36: 7  16Apr2020            
+   This run was terminated on:  19:16:45  29Nov2020            
 
 =------------------------------------------------------------------------------=
    JOB DONE.

@@ -1,0 +1,219 @@
+mpijob CMD    : mpirun -f /tmp/mpiexec.params.k050801.108154
+mpijob PARAMS : -d /home/k0508/k050801/qeirreps/ver_5/qeirreps/reference/Bi_soc
+        r1i6n18 24 omplace -nt 1 "/home/k0508/k050801/qe-6.6/bin/pw.x"
+
+SGI MPT Placement option
+--------------------------
+omplace -nt 1
+
+Node   MPI
+------------
+r1i6n18 24
+
+
+     Program PWSCF v.6.6 starts on 30Nov2020 at  1:38:46 
+
+     This program is part of the open-source Quantum ESPRESSO suite
+     for quantum simulation of materials; please cite
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 21 395502 (2009);
+         "P. Giannozzi et al., J. Phys.:Condens. Matter 29 465901 (2017);
+          URL http://www.quantum-espresso.org", 
+     in publications or presentations arising from this work. More details at
+     http://www.quantum-espresso.org/quote
+
+     Parallel version (MPI), running on    24 processors
+
+     MPI processes distributed on     1 nodes
+     R & G space division:  proc/nbgrp/npool/nimage =      24
+     Fft bands division:     nmany     =       1
+     Waiting for input...
+     Reading input from standard input
+
+     Current dimensions of program PWSCF are:
+     Max number of different atomic species (ntypx) = 10
+     Max number of k-points (npk) =  40000
+     Max angular momentum in pseudopotentials (lmaxx) =  3
+
+     Atomic positions and unit cell read from directory:
+     /work/k0508/k050801/Bi/rep_Bilbao/Bi.save/
+     Atomic positions from file used, from input discarded
+ 
+
+     Subspace diagonalization in iterative solution of the eigenvalue problem:
+     a serial algorithm will be used
+
+     Message from routine setup:
+     using ibrav=0 with symmetry is DISCOURAGED, use correct ibrav instead
+ 
+     Parallelization info
+     --------------------
+     sticks:   dense  smooth     PW     G-vecs:    dense   smooth      PW
+     Min          91      91     25                 2787     2787     402
+     Max          92      92     26                 2793     2793     405
+     Sum        2197    2197    609                66925    66925    9691
+ 
+
+
+     bravais-lattice index     =            0
+     lattice parameter (alat)  =       9.0662  a.u.
+     unit-cell volume          =     495.7043 (a.u.)^3
+     number of atoms/cell      =            2
+     number of atomic types    =            1
+     number of electrons       =        30.00
+     number of Kohn-Sham states=           38
+     kinetic-energy cutoff     =     100.0000  Ry
+     charge density cutoff     =     400.0000  Ry
+     Exchange-correlation= PBE
+                           (   1   4   3   4   0   0   0)
+     Non magnetic calculation with spin-orbit
+
+
+     celldm(1)=   9.066241  celldm(2)=   0.000000  celldm(3)=   0.000000
+     celldm(4)=   0.000000  celldm(5)=   0.000000  celldm(6)=   0.000000
+
+     crystal axes: (cart. coord. in units of alat)
+               a(1) = (   0.480401   0.277359   0.832038 )  
+               a(2) = (  -0.480401   0.277359   0.832038 )  
+               a(3) = (   0.000000  -0.554719   0.832038 )  
+
+     reciprocal axes: (cart. coord. in units 2 pi/alat)
+               b(1) = (  1.040798  0.600905  0.400623 )  
+               b(2) = ( -1.040798  0.600905  0.400623 )  
+               b(3) = (  0.000000 -1.201810  0.400623 )  
+
+
+     PseudoPot. # 1 for Bi read from file:
+     ../../pseudo/soc/Bi.upf
+     MD5 check sum: 260977096fd1df4b879f04c556a28fcb
+     Pseudo is Norm-conserving + core correction, Zval = 15.0
+     Generated using ONCVPSP code by D. R. Hamann
+     Using radial grid of 1562 points, 10 beta functions with: 
+                l(1) =   0
+                l(2) =   0
+                l(3) =   1
+                l(4) =   1
+                l(5) =   1
+                l(6) =   1
+                l(7) =   2
+                l(8) =   2
+                l(9) =   2
+               l(10) =   2
+
+     atomic species   valence    mass     pseudopotential
+        Bi            15.00   208.98040     Bi( 1.00)
+
+     12 Sym. Ops., with inversion, found
+
+
+
+   Cartesian axes
+
+     site n.     atom                  positions (alat units)
+         1           Bi  tau(   1) = (   0.4804007   0.2773595   0.2404589  )
+         2           Bi  tau(   2) = (   0.0000000   0.0000000   0.5915789  )
+
+     number of k points=     4  Methfessel-Paxton smearing, width (Ry)=  0.0100
+                       cart. coord. in units 2pi/alat
+        k(    1) = (   0.0000000   0.0000000   0.0000000), wk =   0.2500000
+        k(    2) = (  -0.5203989   0.3004525   0.2003114), wk =   0.2500000
+        k(    3) = (   0.0000000   0.6009049   0.4006228), wk =   0.2500000
+        k(    4) = (   0.0000000   0.0000000   0.6009342), wk =   0.2500000
+
+     Dense  grid:    66925 G-vectors     FFT dimensions: (  60,  60,  60)
+
+     Estimated max dynamical RAM per process >       9.39 MB
+
+     Estimated total dynamical RAM >     225.45 MB
+
+     The potential is recalculated from file :
+     /work/k0508/k050801/Bi/rep_Bilbao/Bi.save/charge-density
+
+     Starting wfcs are   36 randomized atomic wfcs +    2 random wfcs
+
+     Band Structure Calculation
+     Davidson diagonalization with overlap
+
+     ethr =  3.33E-11,  avg # of iterations = 30.5
+
+     total cpu time spent up to now is        2.7 secs
+
+     End of band structure calculation
+
+          k = 0.0000 0.0000 0.0000 (  8383 PWs)   bands (ev):
+
+   -14.9481 -14.9481 -14.9433 -14.9433 -14.8882 -14.8882 -14.8858 -14.8858
+   -12.0269 -12.0269 -12.0171 -12.0171 -12.0119 -12.0119 -11.8298 -11.8298
+   -11.8242 -11.8242 -11.8215 -11.8215  -3.4027  -3.4027   1.7596   1.7596
+     6.4349   6.4349   8.5925   8.5925   8.8430   8.8430  10.1986  10.1986
+    12.6988  12.6988  12.9190  12.9190  14.7417  14.7417
+
+          k =-0.5204 0.3005 0.2003 (  8404 PWs)   bands (ev):
+
+   -14.9300 -14.9300 -14.9197 -14.9197 -14.9015 -14.9015 -14.8937 -14.8937
+   -11.9827 -11.9827 -11.9605 -11.9605 -11.9276 -11.9276 -11.9228 -11.9228
+   -11.8859 -11.8859 -11.8717 -11.8717  -1.5642  -1.5642  -1.0674  -1.0674
+     7.4596   7.4596   7.4756   7.4756   9.1741   9.1741   9.2617   9.2617
+     9.9209   9.9209  10.2803  10.2803  16.7760  16.7760
+
+          k = 0.0000 0.6009 0.4006 (  8330 PWs)   bands (ev):
+
+   -14.9514 -14.9514 -14.9291 -14.9291 -14.8932 -14.8932 -14.8770 -14.8770
+   -12.0302 -12.0302 -11.9722 -11.9722 -11.9533 -11.9533 -11.8992 -11.8992
+   -11.8782 -11.8782 -11.8084 -11.8084  -1.6985  -1.6985  -0.0217  -0.0217
+     4.6137   4.6137   5.6229   5.6229   7.0015   7.0015  11.7165  11.7165
+    13.0239  13.0239  15.0858  15.0858  15.4546  15.4546
+
+          k = 0.0000 0.0000 0.6009 (  8340 PWs)   bands (ev):
+
+   -14.9322 -14.9322 -14.9195 -14.9195 -14.8994 -14.8994 -14.8975 -14.8975
+   -11.9900 -11.9900 -11.9666 -11.9666 -11.9627 -11.9627 -11.8859 -11.8859
+   -11.8751 -11.8751 -11.8694 -11.8694  -2.1220  -2.1220  -0.6325  -0.6325
+     7.5465   7.5465   7.9039   7.9039   9.4627   9.4627   9.5500   9.5500
+    10.0975  10.0975  10.4075  10.4075  16.3619  16.3619
+
+     Writing output data file /work/k0508/k050801/Bi/rep_Bilbao/Bi.save/
+ 
+     init_run     :      0.07s CPU      0.11s WALL (       1 calls)
+     electrons    :      1.87s CPU      1.92s WALL (       1 calls)
+
+     Called by init_run:
+     wfcinit      :      0.00s CPU      0.00s WALL (       1 calls)
+     potinit      :      0.01s CPU      0.03s WALL (       1 calls)
+     hinit0       :      0.04s CPU      0.05s WALL (       1 calls)
+
+     Called by electrons:
+     c_bands      :      1.87s CPU      1.92s WALL (       1 calls)
+     v_of_rho     :      0.01s CPU      0.02s WALL (       1 calls)
+
+     Called by c_bands:
+     init_us_2    :      0.00s CPU      0.00s WALL (       4 calls)
+     cegterg      :      1.74s CPU      1.78s WALL (       8 calls)
+
+     Called by *egterg:
+     cdiaghg      :      0.20s CPU      0.20s WALL (     126 calls)
+     h_psi        :      1.47s CPU      1.51s WALL (     134 calls)
+     g_psi        :      0.00s CPU      0.00s WALL (     122 calls)
+
+     Called by h_psi:
+     h_psi:calbec :      0.05s CPU      0.05s WALL (     134 calls)
+     vloc_psi     :      1.36s CPU      1.40s WALL (     134 calls)
+     add_vuspsi   :      0.05s CPU      0.05s WALL (     134 calls)
+
+     General routines
+     calbec       :      0.04s CPU      0.05s WALL (     134 calls)
+     fft          :      0.02s CPU      0.04s WALL (      14 calls)
+     fftw         :      1.24s CPU      1.27s WALL (    9068 calls)
+     davcio       :      0.00s CPU      0.00s WALL (       8 calls)
+ 
+     Parallel routines
+     fft_scatt_xy :      0.10s CPU      0.11s WALL (    9082 calls)
+     fft_scatt_yz :      0.58s CPU      0.59s WALL (    9082 calls)
+ 
+     PWSCF        :      2.24s CPU      2.93s WALL
+
+ 
+   This run was terminated on:   1:38:49  30Nov2020            
+
+=------------------------------------------------------------------------------=
+   JOB DONE.
+=------------------------------------------------------------------------------=

@@ -1,0 +1,74 @@
+ reading:.
+ filling:           8
+ exporting an input file for CheckTopologicalMat
+ ncomp=           2
+ 
+ =================
+ 
+ lattice vec: bohr
+  0.000000000000000E+000   5.16797090588000        5.16797090588000     
+   5.16797090588000       0.000000000000000E+000   5.16797090588000     
+   5.16797090588000        5.16797090588000       0.000000000000000E+000
+ 
+ reci_vec: 1/bohr
+ -0.607896737579416       0.607896737579416       0.607896737579416     
+  0.607896737579416      -0.607896737579416       0.607896737579416     
+  0.607896737579416       0.607896737579416      -0.607896737579416     
+ 
+ =================
+ symmetry operation type:
+           1 E
+           2 2-fold screw
+           3 2-fold screw
+           4 2-fold screw
+           5 2-fold screw
+           6 C2
+           7 4-fold screw
+           8 4-fold screw
+           9 2-fold screw
+          10 C2
+          11 4-fold screw
+          12 4-fold screw
+          13 2-fold screw
+          14 C2
+          15 4-fold screw
+          16 4-fold screw
+          17 C3
+          18 3-fold screw
+          19 3-fold screw
+          20 3-fold screw
+          21 C3
+          22 3-fold screw
+          23 3-fold screw
+          24 3-fold screw
+          25 I
+          26 glide
+          27 glide
+          28 glide
+          29 glide
+          30 M
+          31 IC4+translation
+          32 IC4+translation
+          33 glide
+          34 M
+          35 IC4+translation
+          36 IC4+translation
+          37 glide
+          38 M
+          39 IC4+translation
+          40 IC4+translation
+          41 IC3
+          42 IC3+translation
+          43 IC3+translation
+          44 IC3+translation
+          45 IC3
+          46 IC3+translation
+          47 IC3+translation
+          48 IC3+translation
+ 
+ =================
+ 
+ NBAND:          16
+ =================
+ 
+ job done

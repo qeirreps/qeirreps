@@ -1,73 +1,73 @@
  not specify the filling
  reading:.
- ncomp=           2
+ ncomp=           1
  
  =================
  
  lattice vec: bohr
-   7.80854761490967       0.000000000000000E+000  0.000000000000000E+000
-  0.000000000000000E+000   7.80854761490967       0.000000000000000E+000
-  0.000000000000000E+000  0.000000000000000E+000   7.80854761490967     
+  0.000000000000000E+000   5.16797090588000        5.16797090588000     
+   5.16797090588000       0.000000000000000E+000   5.16797090588000     
+   5.16797090588000        5.16797090588000       0.000000000000000E+000
  
  reci_vec: 1/bohr
-  0.804654798439399       0.000000000000000E+000  0.000000000000000E+000
-  0.000000000000000E+000  0.804654798439399       0.000000000000000E+000
-  0.000000000000000E+000  0.000000000000000E+000  0.804654798439399     
+ -0.607896737579416       0.607896737579416       0.607896737579416     
+  0.607896737579416      -0.607896737579416       0.607896737579416     
+  0.607896737579416       0.607896737579416      -0.607896737579416     
  
  =================
  symmetry operation type:
            1 E
-           2 C2
-           3 C2
-           4 C2
-           5 C2
+           2 2-fold screw
+           3 2-fold screw
+           4 2-fold screw
+           5 2-fold screw
            6 C2
-           7 C4
-           8 C4
-           9 C2
+           7 4-fold screw
+           8 4-fold screw
+           9 2-fold screw
           10 C2
-          11 C4
-          12 C4
-          13 C2
+          11 4-fold screw
+          12 4-fold screw
+          13 2-fold screw
           14 C2
-          15 C4
-          16 C4
+          15 4-fold screw
+          16 4-fold screw
           17 C3
-          18 C3
-          19 C3
-          20 C3
+          18 3-fold screw
+          19 3-fold screw
+          20 3-fold screw
           21 C3
-          22 C3
-          23 C3
-          24 C3
+          22 3-fold screw
+          23 3-fold screw
+          24 3-fold screw
           25 I
-          26 M
-          27 M
-          28 M
-          29 M
+          26 glide
+          27 glide
+          28 glide
+          29 glide
           30 M
-          31 IC4
-          32 IC4
-          33 M
+          31 IC4+translation
+          32 IC4+translation
+          33 glide
           34 M
-          35 IC4
-          36 IC4
-          37 M
+          35 IC4+translation
+          36 IC4+translation
+          37 glide
           38 M
-          39 IC4
-          40 IC4
+          39 IC4+translation
+          40 IC4+translation
           41 IC3
-          42 IC3
-          43 IC3
-          44 IC3
+          42 IC3+translation
+          43 IC3+translation
+          44 IC3+translation
           45 IC3
-          46 IC3
-          47 IC3
-          48 IC3
+          46 IC3+translation
+          47 IC3+translation
+          48 IC3+translation
  
  =================
  
- NBAND:          82
+ NBAND:           8
  =================
  
  job done
