@@ -1778,7 +1778,7 @@ contains
              end do
              write(21,fmt='(" ",1I3)',advance='no')nint(real(n_irrep)/n)             
              if(abs(nint(real(n_irrep)/n)-n_irrep/n)>err)then
-                print*,"Warning: number of irreps is not an integer"
+                print*,"Warning: number of irreps is ill-defined (some levels are partially occupied)"
                 print*,"at k=",SKI(:,ik),"and level=",ib,":"
                 print*,n_irrep/n
              end if
